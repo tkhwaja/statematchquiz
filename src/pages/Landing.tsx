@@ -1,14 +1,20 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { MapPin, Heart, Home, Sparkles } from "lucide-react";
-import CloudBackground from "@/components/CloudBackground";
+import heroLandscape from "@/assets/hero-landscape.jpg";
 
 const Landing = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen">
-      <CloudBackground />
+    <div className="min-h-screen relative">
+      {/* Background Image */}
+      <div 
+        className="fixed inset-0 -z-10 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${heroLandscape})` }}
+      >
+        <div className="absolute inset-0 bg-background/40 backdrop-blur-[2px]" />
+      </div>
       
       {/* Hero Section */}
       <div className="container mx-auto px-4 py-20">
