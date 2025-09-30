@@ -1,227 +1,312 @@
 [
   {
     "id": "q1",
-    "prompt": "What's your age group?",
+    "prompt": "What is your age bracket?",
     "choices": [
-      {
-        "id": "18-25",
-        "label": "18-25",
-        "weights": { "CA": 3, "TX": 2, "FL": 2, "CO": 3, "NY": 2 }
-      },
-      {
-        "id": "26-35",
-        "label": "26-35",
-        "weights": { "CA": 3, "WA": 3, "TX": 2, "CO": 2, "NC": 2 }
-      },
-      {
-        "id": "36-50",
-        "label": "36-50",
-        "weights": { "NC": 3, "VA": 3, "TX": 2, "FL": 2, "CO": 2 }
-      },
-      {
-        "id": "51+",
-        "label": "51+",
-        "weights": { "FL": 3, "AZ": 3, "NC": 2, "SC": 2, "TN": 2 }
-      }
+      { "id": "18-25", "label": "18-25", "weights": { "CA": 2, "TX": 2, "CO": 2, "NY": 1, "FL": 1 } },
+      { "id": "26-35", "label": "26-35", "weights": { "CA": 2, "TX": 2, "WA": 2, "CO": 2, "NC": 1 } },
+      { "id": "36-50", "label": "36-50", "weights": { "TX": 2, "FL": 2, "NC": 2, "GA": 2, "VA": 1 } },
+      { "id": "51-65", "label": "51-65", "weights": { "FL": 3, "AZ": 2, "NC": 2, "SC": 2, "TN": 1 } },
+      { "id": "65+", "label": "65+", "weights": { "FL": 3, "AZ": 3, "SC": 2, "NM": 2, "NV": 1 } }
     ]
   },
   {
     "id": "q2",
-    "prompt": "What's your political leaning?",
+    "prompt": "What is your relationship status?",
     "choices": [
-      {
-        "id": "progressive",
-        "label": "Progressive",
-        "weights": { "CA": 5, "NY": 4, "WA": 4, "OR": 4, "MA": 3 }
-      },
-      {
-        "id": "moderate",
-        "label": "Moderate",
-        "weights": { "CO": 3, "NC": 3, "VA": 3, "AZ": 2, "GA": 2 }
-      },
-      {
-        "id": "conservative",
-        "label": "Conservative",
-        "weights": { "TX": 5, "FL": 4, "TN": 4, "SC": 3, "ID": 3 }
-      }
+      { "id": "single", "label": "Single", "weights": { "CA": 2, "NY": 2, "TX": 2, "CO": 1, "WA": 1 } },
+      { "id": "relationship", "label": "In a relationship", "weights": { "CA": 1, "TX": 2, "NC": 2, "CO": 1, "FL": 1 } },
+      { "id": "married-no-kids", "label": "Married, no children", "weights": { "TX": 2, "NC": 2, "VA": 2, "CO": 1, "FL": 1 } },
+      { "id": "married-kids", "label": "Married with children", "weights": { "TX": 3, "NC": 3, "VA": 2, "FL": 2, "GA": 2 } }
     ]
   },
   {
     "id": "q3",
-    "prompt": "How important are reproductive rights to you?",
+    "prompt": "Do you have children or plan to have them?",
     "choices": [
-      {
-        "id": "very-important",
-        "label": "Very Important",
-        "weights": { "CA": 5, "NY": 4, "WA": 4, "OR": 4, "CO": 3 }
-      },
-      {
-        "id": "somewhat-important",
-        "label": "Somewhat Important",
-        "weights": { "NC": 2, "VA": 2, "AZ": 2, "NV": 2, "PA": 2 }
-      },
-      {
-        "id": "not-important",
-        "label": "Not Important",
-        "weights": { "TX": 3, "FL": 3, "TN": 2, "AL": 2, "OK": 2 }
-      }
+      { "id": "no-none", "label": "No, and don't plan to", "weights": { "CA": 2, "NY": 2, "CO": 2, "WA": 1, "OR": 1 } },
+      { "id": "planning", "label": "Planning to have children", "weights": { "TX": 2, "NC": 2, "VA": 2, "GA": 1, "FL": 1 } },
+      { "id": "young-kids", "label": "Yes, young children", "weights": { "TX": 3, "NC": 3, "VA": 2, "FL": 2, "GA": 2 } },
+      { "id": "older-kids", "label": "Yes, teenagers or older", "weights": { "TX": 2, "NC": 2, "FL": 2, "VA": 2, "GA": 1 } }
     ]
   },
   {
     "id": "q4",
-    "prompt": "What's your preferred climate?",
+    "prompt": "How important is racial and ethnic diversity in your community?",
     "choices": [
-      {
-        "id": "warm-year-round",
-        "label": "Warm Year-Round",
-        "weights": { "FL": 5, "CA": 4, "AZ": 4, "TX": 3, "HI": 5 }
-      },
-      {
-        "id": "four-seasons",
-        "label": "Four Distinct Seasons",
-        "weights": { "NC": 3, "VA": 3, "CO": 3, "PA": 2, "NY": 2 }
-      },
-      {
-        "id": "mild-cool",
-        "label": "Mild/Cool",
-        "weights": { "WA": 4, "OR": 3, "MA": 2, "VT": 2, "ME": 2 }
-      }
+      { "id": "very-important", "label": "Very important", "weights": { "CA": 3, "NY": 3, "TX": 2, "FL": 2, "IL": 2 } },
+      { "id": "somewhat", "label": "Somewhat important", "weights": { "CA": 2, "TX": 2, "NC": 2, "GA": 2, "CO": 1 } },
+      { "id": "neutral", "label": "Neutral", "weights": { "TX": 1, "FL": 1, "NC": 1, "AZ": 1, "TN": 1 } },
+      { "id": "not-important", "label": "Not a priority", "weights": { "MT": 2, "WY": 2, "ID": 2, "ND": 2, "ME": 1 } }
     ]
   },
   {
     "id": "q5",
-    "prompt": "What landscape appeals to you most?",
+    "prompt": "What are your political leanings?",
     "choices": [
-      {
-        "id": "beach-ocean",
-        "label": "Beaches & Ocean",
-        "weights": { "CA": 5, "FL": 5, "HI": 5, "NC": 3, "SC": 3 }
-      },
-      {
-        "id": "mountains",
-        "label": "Mountains",
-        "weights": { "CO": 5, "UT": 4, "WY": 3, "NC": 2, "MT": 3 }
-      },
-      {
-        "id": "forests",
-        "label": "Forests & Greenery",
-        "weights": { "WA": 4, "OR": 4, "VT": 3, "NC": 2, "GA": 2 }
-      },
-      {
-        "id": "desert",
-        "label": "Desert",
-        "weights": { "AZ": 5, "NV": 4, "NM": 3, "UT": 2, "CA": 1 }
-      }
+      { "id": "very-liberal", "label": "Very liberal/progressive", "weights": { "CA": 3, "NY": 3, "WA": 3, "OR": 3, "MA": 3 } },
+      { "id": "liberal", "label": "Liberal/left-leaning", "weights": { "CA": 2, "NY": 2, "CO": 2, "VA": 2, "IL": 2 } },
+      { "id": "moderate", "label": "Moderate/centrist", "weights": { "NC": 2, "VA": 2, "CO": 2, "NV": 2, "AZ": 2 } },
+      { "id": "conservative", "label": "Conservative/right-leaning", "weights": { "TX": 2, "FL": 2, "TN": 2, "GA": 2, "SC": 2 } },
+      { "id": "very-conservative", "label": "Very conservative", "weights": { "TX": 3, "FL": 2, "TN": 3, "AL": 3, "WY": 3 } }
     ]
   },
   {
     "id": "q6",
-    "prompt": "What's your living environment preference?",
+    "prompt": "What is your stance on abortion access?",
     "choices": [
-      {
-        "id": "urban-core",
-        "label": "Urban Core",
-        "weights": { "NY": 5, "CA": 4, "IL": 3, "MA": 3, "WA": 2 }
-      },
-      {
-        "id": "suburbs",
-        "label": "Suburbs",
-        "weights": { "TX": 3, "FL": 3, "NC": 3, "VA": 3, "GA": 2 }
-      },
-      {
-        "id": "small-town",
-        "label": "Small Town",
-        "weights": { "VT": 3, "ME": 3, "MT": 2, "ID": 2, "NH": 2 }
-      },
-      {
-        "id": "rural",
-        "label": "Rural",
-        "weights": { "MT": 3, "WY": 3, "ID": 3, "VT": 2, "ME": 2 }
-      }
+      { "id": "must-protect", "label": "Must be fully protected and accessible", "weights": { "CA": 3, "NY": 3, "WA": 3, "OR": 3, "MA": 3 } },
+      { "id": "should-legal", "label": "Should be legal with some restrictions", "weights": { "CO": 2, "VA": 2, "NV": 2, "NC": 1, "IL": 2 } },
+      { "id": "strict-limits", "label": "Should have strict limitations", "weights": { "FL": 2, "TX": 2, "GA": 2, "OH": 2, "AZ": 1 } },
+      { "id": "illegal", "label": "Should be illegal or highly restricted", "weights": { "TX": 3, "AL": 3, "TN": 3, "OK": 3, "AR": 3 } }
     ]
   },
   {
     "id": "q7",
-    "prompt": "How important is a vibrant nightlife and social scene?",
+    "prompt": "What is your stance on gun laws?",
     "choices": [
-      {
-        "id": "very-important-nightlife",
-        "label": "Very Important",
-        "weights": { "NY": 5, "CA": 4, "FL": 4, "TX": 3, "NV": 5 }
-      },
-      {
-        "id": "somewhat-important-nightlife",
-        "label": "Somewhat Important",
-        "weights": { "CO": 3, "WA": 2, "NC": 2, "GA": 2, "AZ": 2 }
-      },
-      {
-        "id": "not-important-nightlife",
-        "label": "Not Important",
-        "weights": { "VT": 3, "ME": 3, "ID": 2, "MT": 2, "NH": 2 }
-      }
+      { "id": "strict-control", "label": "Strict gun control needed", "weights": { "CA": 3, "NY": 3, "MA": 3, "NJ": 3, "CT": 3 } },
+      { "id": "moderate-control", "label": "Moderate regulations", "weights": { "CO": 2, "VA": 2, "WA": 2, "OR": 2, "IL": 2 } },
+      { "id": "current-fine", "label": "Current laws are fine", "weights": { "NC": 2, "FL": 2, "PA": 2, "AZ": 2, "NV": 1 } },
+      { "id": "pro-2a", "label": "Strong 2nd Amendment protections", "weights": { "TX": 3, "FL": 2, "TN": 3, "MT": 3, "WY": 3 } }
     ]
   },
   {
     "id": "q8",
-    "prompt": "What's your cost of living tolerance?",
+    "prompt": "How important is low crime rate to you?",
     "choices": [
-      {
-        "id": "budget-conscious",
-        "label": "Budget Conscious",
-        "weights": { "TX": 4, "TN": 4, "NC": 3, "GA": 3, "FL": 2 }
-      },
-      {
-        "id": "moderate-cost",
-        "label": "Moderate",
-        "weights": { "CO": 3, "NC": 3, "VA": 2, "AZ": 2, "NV": 2 }
-      },
-      {
-        "id": "willing-to-pay",
-        "label": "Willing to Pay for Quality",
-        "weights": { "CA": 3, "NY": 3, "WA": 3, "MA": 2, "HI": 2 }
-      }
+      { "id": "critical", "label": "Absolutely critical", "weights": { "NH": 3, "VT": 3, "ME": 3, "ID": 2, "UT": 2 } },
+      { "id": "very-important", "label": "Very important", "weights": { "VA": 2, "MA": 2, "MN": 2, "CO": 2, "NC": 2 } },
+      { "id": "somewhat", "label": "Somewhat important", "weights": { "TX": 1, "CA": 1, "FL": 1, "AZ": 1, "GA": 1 } },
+      { "id": "not-priority", "label": "Not my top priority", "weights": { "CA": 2, "NY": 2, "IL": 2, "NV": 1, "LA": 1 } }
     ]
   },
   {
     "id": "q9",
-    "prompt": "How important is healthcare quality and accessibility?",
+    "prompt": "How important is access to quality healthcare?",
     "choices": [
-      {
-        "id": "top-priority-healthcare",
-        "label": "Top Priority",
-        "weights": { "MA": 5, "NY": 4, "CA": 4, "MN": 3, "CO": 3 }
-      },
-      {
-        "id": "important-healthcare",
-        "label": "Important",
-        "weights": { "NC": 3, "VA": 3, "WA": 2, "PA": 2, "TX": 2 }
-      },
-      {
-        "id": "less-important-healthcare",
-        "label": "Less Important",
-        "weights": { "FL": 2, "TN": 2, "NV": 2, "ID": 1, "MT": 1 }
-      }
+      { "id": "critical", "label": "Absolutely critical", "weights": { "MA": 3, "MN": 3, "CO": 2, "CA": 2, "WA": 2 } },
+      { "id": "very-important", "label": "Very important", "weights": { "MA": 2, "NY": 2, "VA": 2, "NC": 2, "TX": 1 } },
+      { "id": "somewhat", "label": "Somewhat important", "weights": { "FL": 1, "TX": 1, "AZ": 1, "NV": 1, "GA": 1 } },
+      { "id": "not-priority", "label": "Not a major factor", "weights": { "WY": 1, "MT": 1, "ID": 1, "AK": 1, "SD": 1 } }
     ]
   },
   {
     "id": "q10",
+    "prompt": "How sensitive are you to car insurance costs?",
+    "choices": [
+      { "id": "very-sensitive", "label": "Very sensitive - need lowest rates", "weights": { "ME": 3, "VT": 3, "NH": 3, "IA": 2, "OH": 2 } },
+      { "id": "moderate", "label": "Moderately concerned", "weights": { "NC": 2, "VA": 2, "WI": 2, "IN": 2, "TN": 2 } },
+      { "id": "not-much", "label": "Not very concerned", "weights": { "CA": 1, "NY": 1, "TX": 1, "FL": 1, "IL": 1 } },
+      { "id": "not-factor", "label": "Not a factor", "weights": { "CA": 2, "NY": 2, "MA": 2, "WA": 1, "CO": 1 } }
+    ]
+  },
+  {
+    "id": "q11",
+    "prompt": "What industry do you work in or want to work in?",
+    "choices": [
+      { "id": "tech", "label": "Technology/Software", "weights": { "CA": 3, "WA": 3, "TX": 2, "CO": 2, "NY": 2 } },
+      { "id": "healthcare", "label": "Healthcare/Medical", "weights": { "MA": 3, "MN": 2, "PA": 2, "TX": 2, "NC": 2 } },
+      { "id": "finance", "label": "Finance/Banking", "weights": { "NY": 3, "IL": 2, "NC": 2, "TX": 2, "MA": 2 } },
+      { "id": "trades", "label": "Trades/Construction", "weights": { "TX": 2, "FL": 2, "NC": 2, "AZ": 2, "CO": 2 } },
+      { "id": "remote", "label": "Remote work (industry flexible)", "weights": { "CO": 2, "NC": 2, "TN": 2, "FL": 2, "TX": 2 } },
+      { "id": "creative", "label": "Creative/Arts/Entertainment", "weights": { "CA": 3, "NY": 3, "TN": 2, "TX": 1, "CO": 1 } }
+    ]
+  },
+  {
+    "id": "q12",
+    "prompt": "What is your expected annual household income?",
+    "choices": [
+      { "id": "under-50k", "label": "Under $50,000", "weights": { "TN": 2, "AR": 2, "MS": 2, "AL": 2, "OK": 2 } },
+      { "id": "50-100k", "label": "$50,000 - $100,000", "weights": { "NC": 2, "TX": 2, "FL": 2, "GA": 2, "AZ": 2 } },
+      { "id": "100-150k", "label": "$100,000 - $150,000", "weights": { "TX": 2, "CO": 2, "VA": 2, "NC": 2, "WA": 1 } },
+      { "id": "150-250k", "label": "$150,000 - $250,000", "weights": { "CA": 2, "WA": 2, "MA": 2, "NY": 2, "TX": 2 } },
+      { "id": "over-250k", "label": "Over $250,000", "weights": { "CA": 3, "NY": 3, "WA": 2, "MA": 2, "TX": 2 } }
+    ]
+  },
+  {
+    "id": "q13",
+    "prompt": "How important is low cost of living?",
+    "choices": [
+      { "id": "critical", "label": "Absolutely critical", "weights": { "MS": 3, "AR": 3, "OK": 3, "KS": 3, "AL": 3 } },
+      { "id": "very-important", "label": "Very important", "weights": { "TN": 2, "NC": 2, "SC": 2, "GA": 2, "TX": 2 } },
+      { "id": "somewhat", "label": "Somewhat important", "weights": { "FL": 2, "AZ": 2, "NV": 2, "CO": 1, "VA": 1 } },
+      { "id": "not-priority", "label": "Not a priority", "weights": { "CA": 2, "NY": 2, "MA": 2, "WA": 2, "HI": 2 } }
+    ]
+  },
+  {
+    "id": "q14",
+    "prompt": "What is your ideal climate?",
+    "choices": [
+      { "id": "cold-snowy", "label": "Cold with snowy winters", "weights": { "MN": 3, "WI": 3, "MT": 3, "VT": 3, "NH": 3 } },
+      { "id": "four-seasons", "label": "Four distinct seasons", "weights": { "NC": 2, "VA": 2, "CO": 2, "PA": 2, "MA": 2 } },
+      { "id": "mild", "label": "Mild year-round", "weights": { "CA": 3, "WA": 2, "OR": 2, "NC": 1, "VA": 1 } },
+      { "id": "warm-humid", "label": "Warm and humid", "weights": { "FL": 3, "LA": 3, "GA": 2, "SC": 2, "TX": 2 } },
+      { "id": "hot-dry", "label": "Hot and dry", "weights": { "AZ": 3, "NV": 3, "NM": 3, "TX": 2, "UT": 2 } }
+    ]
+  },
+  {
+    "id": "q15",
+    "prompt": "What type of landscape do you prefer?",
+    "choices": [
+      { "id": "ocean-beaches", "label": "Ocean and beaches", "weights": { "CA": 3, "FL": 3, "HI": 3, "NC": 2, "SC": 2 } },
+      { "id": "mountains", "label": "Mountains", "weights": { "CO": 3, "MT": 3, "WY": 3, "UT": 3, "NC": 2 } },
+      { "id": "forests", "label": "Forests and greenery", "weights": { "WA": 3, "OR": 3, "VT": 3, "NH": 3, "ME": 3 } },
+      { "id": "desert", "label": "Desert", "weights": { "AZ": 3, "NV": 3, "NM": 3, "UT": 2, "CA": 1 } },
+      { "id": "plains-farmland", "label": "Plains and farmland", "weights": { "KS": 3, "IA": 3, "NE": 3, "ND": 3, "SD": 3 } }
+    ]
+  },
+  {
+    "id": "q16",
+    "prompt": "What type of area do you want to live in?",
+    "choices": [
+      { "id": "urban-downtown", "label": "Urban downtown core", "weights": { "NY": 3, "CA": 3, "IL": 3, "WA": 2, "MA": 2 } },
+      { "id": "urban-neighborhood", "label": "Urban neighborhood", "weights": { "CA": 2, "NY": 2, "TX": 2, "CO": 2, "NC": 2 } },
+      { "id": "suburban", "label": "Suburban", "weights": { "TX": 2, "NC": 2, "VA": 2, "FL": 2, "GA": 2 } },
+      { "id": "small-town", "label": "Small town", "weights": { "VT": 3, "NH": 3, "ME": 3, "MT": 2, "ID": 2 } },
+      { "id": "rural", "label": "Rural", "weights": { "MT": 3, "WY": 3, "VT": 2, "ID": 3, "SD": 3 } }
+    ]
+  },
+  {
+    "id": "q17",
+    "prompt": "How important is nightlife and entertainment?",
+    "choices": [
+      { "id": "very-important", "label": "Very important", "weights": { "NY": 3, "CA": 3, "IL": 3, "NV": 3, "FL": 2 } },
+      { "id": "somewhat", "label": "Somewhat important", "weights": { "TX": 2, "CO": 2, "WA": 2, "NC": 2, "GA": 2 } },
+      { "id": "not-much", "label": "Not very important", "weights": { "NC": 1, "VA": 1, "TN": 1, "AZ": 1, "UT": 1 } },
+      { "id": "prefer-quiet", "label": "Prefer quiet family life", "weights": { "VT": 3, "NH": 3, "ME": 3, "ID": 3, "UT": 2 } }
+    ]
+  },
+  {
+    "id": "q18",
+    "prompt": "What outdoor activities do you enjoy?",
+    "choices": [
+      { "id": "hiking-mountains", "label": "Hiking and mountain activities", "weights": { "CO": 3, "MT": 3, "WY": 3, "UT": 3, "WA": 2 } },
+      { "id": "beaches-water", "label": "Beaches and water sports", "weights": { "CA": 3, "FL": 3, "HI": 3, "NC": 2, "SC": 2 } },
+      { "id": "skiing-snow", "label": "Skiing and snow sports", "weights": { "CO": 3, "UT": 3, "VT": 3, "MT": 3, "WY": 3 } },
+      { "id": "urban-parks", "label": "Urban parks and walking", "weights": { "NY": 2, "CA": 2, "WA": 2, "OR": 2, "MA": 2 } },
+      { "id": "not-outdoorsy", "label": "Not very outdoorsy", "weights": { "NY": 2, "IL": 2, "NJ": 2, "PA": 1, "OH": 1 } }
+    ]
+  },
+  {
+    "id": "q19",
+    "prompt": "How important is cultural scene (museums, music, arts)?",
+    "choices": [
+      { "id": "very-important", "label": "Very important", "weights": { "NY": 3, "CA": 3, "MA": 3, "IL": 3, "WA": 2 } },
+      { "id": "somewhat", "label": "Somewhat important", "weights": { "TX": 2, "CO": 2, "NC": 2, "TN": 2, "GA": 2 } },
+      { "id": "not-much", "label": "Not very important", "weights": { "FL": 1, "AZ": 1, "NV": 1, "NC": 1, "TX": 1 } },
+      { "id": "not-priority", "label": "Not a priority", "weights": { "WY": 1, "MT": 1, "ID": 1, "SD": 1, "ND": 1 } }
+    ]
+  },
+  {
+    "id": "q20",
+    "prompt": "How important is school quality (for current or future kids)?",
+    "choices": [
+      { "id": "critical", "label": "Absolutely critical", "weights": { "MA": 3, "NJ": 3, "CT": 3, "VA": 3, "MD": 3 } },
+      { "id": "very-important", "label": "Very important", "weights": { "MA": 2, "VA": 2, "NC": 2, "TX": 2, "CO": 2 } },
+      { "id": "somewhat", "label": "Somewhat important", "weights": { "FL": 1, "CA": 1, "WA": 1, "GA": 1, "AZ": 1 } },
+      { "id": "not-applicable", "label": "Not applicable to me", "weights": { "CA": 1, "NY": 1, "CO": 1, "TX": 1, "FL": 1 } }
+    ]
+  },
+  {
+    "id": "q21",
+    "prompt": "Do you prefer to rent or buy a home?",
+    "choices": [
+      { "id": "prefer-rent", "label": "Prefer to rent", "weights": { "NY": 2, "CA": 2, "IL": 2, "WA": 2, "MA": 2 } },
+      { "id": "prefer-buy-affordable", "label": "Prefer to buy (need affordability)", "weights": { "TN": 3, "AR": 3, "OK": 3, "MS": 3, "AL": 3 } },
+      { "id": "prefer-buy-flexible", "label": "Prefer to buy (budget flexible)", "weights": { "NC": 2, "TX": 2, "FL": 2, "GA": 2, "SC": 2 } },
+      { "id": "no-preference", "label": "No strong preference", "weights": { "CO": 1, "VA": 1, "AZ": 1, "NV": 1, "OR": 1 } }
+    ]
+  },
+  {
+    "id": "q22",
+    "prompt": "How important is public transportation?",
+    "choices": [
+      { "id": "essential", "label": "Essential - don't want a car", "weights": { "NY": 3, "MA": 3, "IL": 3, "CA": 2, "WA": 2 } },
+      { "id": "nice-to-have", "label": "Nice to have", "weights": { "CA": 2, "WA": 2, "OR": 2, "CO": 2, "TX": 1 } },
+      { "id": "not-needed", "label": "Not needed - prefer driving", "weights": { "TX": 2, "FL": 2, "AZ": 2, "NC": 2, "GA": 2 } },
+      { "id": "car-dependent-ok", "label": "Car-dependent is fine", "weights": { "TX": 3, "FL": 3, "AZ": 3, "TN": 3, "NC": 2 } }
+    ]
+  },
+  {
+    "id": "q23",
+    "prompt": "How important is religious or faith community?",
+    "choices": [
+      { "id": "very-important", "label": "Very important", "weights": { "UT": 3, "TN": 3, "AL": 3, "MS": 3, "OK": 3 } },
+      { "id": "somewhat", "label": "Somewhat important", "weights": { "TX": 2, "NC": 2, "GA": 2, "SC": 2, "VA": 1 } },
+      { "id": "not-much", "label": "Not very important", "weights": { "CA": 1, "NY": 1, "WA": 1, "OR": 1, "CO": 1 } },
+      { "id": "prefer-secular", "label": "Prefer secular community", "weights": { "WA": 3, "OR": 3, "VT": 3, "MA": 2, "CA": 2 } }
+    ]
+  },
+  {
+    "id": "q24",
+    "prompt": "How important is proximity to family and friends?",
+    "choices": [
+      { "id": "critical", "label": "Must be close (within 1-2 hours)", "weights": { "OH": 2, "PA": 2, "MI": 2, "IN": 2, "WI": 2 } },
+      { "id": "prefer-close", "label": "Prefer nearby (within same state)", "weights": { "TX": 2, "CA": 2, "FL": 2, "NC": 2, "NY": 1 } },
+      { "id": "not-critical", "label": "Not critical", "weights": { "CO": 2, "WA": 2, "OR": 2, "AZ": 2, "NV": 2 } },
+      { "id": "fresh-start", "label": "Want a fresh start elsewhere", "weights": { "CO": 3, "WA": 3, "OR": 3, "TX": 2, "NC": 2 } }
+    ]
+  },
+  {
+    "id": "q25",
     "prompt": "How important is LGBTQ+ friendliness?",
     "choices": [
-      {
-        "id": "very-important-lgbtq",
-        "label": "Very Important",
-        "weights": { "CA": 5, "NY": 5, "MA": 4, "WA": 4, "OR": 4 }
-      },
-      {
-        "id": "somewhat-important-lgbtq",
-        "label": "Somewhat Important",
-        "weights": { "CO": 3, "IL": 3, "NC": 2, "VA": 2, "NV": 2 }
-      },
-      {
-        "id": "not-important-lgbtq",
-        "label": "Not Important",
-        "weights": { "TX": 2, "FL": 2, "TN": 2, "ID": 2, "AL": 2 }
-      }
+      { "id": "critical", "label": "Absolutely critical", "weights": { "CA": 3, "NY": 3, "MA": 3, "WA": 3, "OR": 3 } },
+      { "id": "very-important", "label": "Very important", "weights": { "CA": 2, "CO": 2, "IL": 2, "VA": 2, "NV": 2 } },
+      { "id": "somewhat", "label": "Somewhat important", "weights": { "NC": 1, "TX": 1, "FL": 1, "GA": 1, "AZ": 1 } },
+      { "id": "not-factor", "label": "Not a factor for me", "weights": { "TX": 1, "FL": 1, "TN": 1, "AL": 1, "OK": 1 } }
+    ]
+  },
+  {
+    "id": "q26",
+    "prompt": "How do you feel about state income tax?",
+    "choices": [
+      { "id": "must-avoid", "label": "Must avoid - no state income tax", "weights": { "TX": 3, "FL": 3, "WA": 3, "NV": 3, "TN": 3 } },
+      { "id": "prefer-low", "label": "Prefer low tax states", "weights": { "NC": 2, "AZ": 2, "GA": 2, "SC": 2, "CO": 2 } },
+      { "id": "okay-moderate", "label": "Okay with moderate taxes", "weights": { "VA": 2, "NC": 1, "CO": 1, "OR": 1, "MA": 1 } },
+      { "id": "not-concerned", "label": "Not a major concern", "weights": { "CA": 2, "NY": 2, "MA": 2, "OR": 2, "MN": 2 } }
+    ]
+  },
+  {
+    "id": "q27",
+    "prompt": "How do you feel about natural disaster risk?",
+    "choices": [
+      { "id": "avoid-all", "label": "Must avoid high-risk areas", "weights": { "CO": 3, "VA": 3, "NC": 2, "PA": 2, "OH": 2 } },
+      { "id": "tolerate-some", "label": "Can tolerate some risk", "weights": { "TX": 2, "CA": 2, "FL": 1, "AZ": 2, "NC": 1 } },
+      { "id": "hurricanes-ok", "label": "Hurricanes are acceptable", "weights": { "FL": 3, "NC": 2, "SC": 2, "LA": 2, "TX": 1 } },
+      { "id": "not-concerned", "label": "Not a major concern", "weights": { "CA": 2, "FL": 2, "LA": 2, "TX": 1, "OK": 1 } }
+    ]
+  },
+  {
+    "id": "q28",
+    "prompt": "How important is immigrant and multicultural friendliness?",
+    "choices": [
+      { "id": "very-important", "label": "Very important", "weights": { "CA": 3, "NY": 3, "TX": 2, "FL": 2, "IL": 2 } },
+      { "id": "somewhat", "label": "Somewhat important", "weights": { "CA": 2, "TX": 2, "WA": 2, "NC": 2, "GA": 2 } },
+      { "id": "neutral", "label": "Neutral", "weights": { "CO": 1, "VA": 1, "NC": 1, "AZ": 1, "NV": 1 } },
+      { "id": "not-priority", "label": "Not a priority", "weights": { "MT": 1, "WY": 1, "ID": 1, "ND": 1, "SD": 1 } }
+    ]
+  },
+  {
+    "id": "q29",
+    "prompt": "What is your work arrangement preference?",
+    "choices": [
+      { "id": "fully-remote", "label": "Fully remote", "weights": { "CO": 3, "NC": 3, "TN": 3, "TX": 2, "FL": 2 } },
+      { "id": "hybrid", "label": "Hybrid (2-3 days office)", "weights": { "TX": 2, "NC": 2, "CO": 2, "VA": 2, "GA": 2 } },
+      { "id": "mostly-office", "label": "Mostly in-office", "weights": { "CA": 2, "NY": 2, "TX": 2, "MA": 2, "WA": 2 } },
+      { "id": "fully-office", "label": "Fully in-office", "weights": { "NY": 3, "CA": 2, "IL": 2, "MA": 2, "TX": 2 } }
+    ]
+  },
+  {
+    "id": "q30",
+    "prompt": "What is most important to you overall?",
+    "choices": [
+      { "id": "affordability", "label": "Affordability and low cost of living", "weights": { "TN": 3, "AR": 3, "MS": 3, "OK": 3, "KS": 3 } },
+      { "id": "job-opportunities", "label": "Job opportunities and career growth", "weights": { "CA": 3, "TX": 3, "WA": 3, "NY": 3, "MA": 2 } },
+      { "id": "quality-life", "label": "Quality of life and environment", "weights": { "CO": 3, "WA": 2, "OR": 2, "VT": 2, "NH": 2 } },
+      { "id": "values-politics", "label": "Shared values and politics", "weights": { "CA": 2, "NY": 2, "TX": 2, "MA": 2, "WA": 2 } },
+      { "id": "family-community", "label": "Family and community", "weights": { "NC": 3, "VA": 3, "TX": 2, "GA": 2, "TN": 2 } }
     ]
   }
 ]
