@@ -1,0 +1,227 @@
+[
+  {
+    "id": "q1",
+    "prompt": "What's your age group?",
+    "choices": [
+      {
+        "id": "18-25",
+        "label": "18-25",
+        "weights": { "CA": 3, "TX": 2, "FL": 2, "CO": 3, "NY": 2 }
+      },
+      {
+        "id": "26-35",
+        "label": "26-35",
+        "weights": { "CA": 3, "WA": 3, "TX": 2, "CO": 2, "NC": 2 }
+      },
+      {
+        "id": "36-50",
+        "label": "36-50",
+        "weights": { "NC": 3, "VA": 3, "TX": 2, "FL": 2, "CO": 2 }
+      },
+      {
+        "id": "51+",
+        "label": "51+",
+        "weights": { "FL": 3, "AZ": 3, "NC": 2, "SC": 2, "TN": 2 }
+      }
+    ]
+  },
+  {
+    "id": "q2",
+    "prompt": "What's your political leaning?",
+    "choices": [
+      {
+        "id": "progressive",
+        "label": "Progressive",
+        "weights": { "CA": 5, "NY": 4, "WA": 4, "OR": 4, "MA": 3 }
+      },
+      {
+        "id": "moderate",
+        "label": "Moderate",
+        "weights": { "CO": 3, "NC": 3, "VA": 3, "AZ": 2, "GA": 2 }
+      },
+      {
+        "id": "conservative",
+        "label": "Conservative",
+        "weights": { "TX": 5, "FL": 4, "TN": 4, "SC": 3, "ID": 3 }
+      }
+    ]
+  },
+  {
+    "id": "q3",
+    "prompt": "How important are reproductive rights to you?",
+    "choices": [
+      {
+        "id": "very-important",
+        "label": "Very Important",
+        "weights": { "CA": 5, "NY": 4, "WA": 4, "OR": 4, "CO": 3 }
+      },
+      {
+        "id": "somewhat-important",
+        "label": "Somewhat Important",
+        "weights": { "NC": 2, "VA": 2, "AZ": 2, "NV": 2, "PA": 2 }
+      },
+      {
+        "id": "not-important",
+        "label": "Not Important",
+        "weights": { "TX": 3, "FL": 3, "TN": 2, "AL": 2, "OK": 2 }
+      }
+    ]
+  },
+  {
+    "id": "q4",
+    "prompt": "What's your preferred climate?",
+    "choices": [
+      {
+        "id": "warm-year-round",
+        "label": "Warm Year-Round",
+        "weights": { "FL": 5, "CA": 4, "AZ": 4, "TX": 3, "HI": 5 }
+      },
+      {
+        "id": "four-seasons",
+        "label": "Four Distinct Seasons",
+        "weights": { "NC": 3, "VA": 3, "CO": 3, "PA": 2, "NY": 2 }
+      },
+      {
+        "id": "mild-cool",
+        "label": "Mild/Cool",
+        "weights": { "WA": 4, "OR": 3, "MA": 2, "VT": 2, "ME": 2 }
+      }
+    ]
+  },
+  {
+    "id": "q5",
+    "prompt": "What landscape appeals to you most?",
+    "choices": [
+      {
+        "id": "beach-ocean",
+        "label": "Beaches & Ocean",
+        "weights": { "CA": 5, "FL": 5, "HI": 5, "NC": 3, "SC": 3 }
+      },
+      {
+        "id": "mountains",
+        "label": "Mountains",
+        "weights": { "CO": 5, "UT": 4, "WY": 3, "NC": 2, "MT": 3 }
+      },
+      {
+        "id": "forests",
+        "label": "Forests & Greenery",
+        "weights": { "WA": 4, "OR": 4, "VT": 3, "NC": 2, "GA": 2 }
+      },
+      {
+        "id": "desert",
+        "label": "Desert",
+        "weights": { "AZ": 5, "NV": 4, "NM": 3, "UT": 2, "CA": 1 }
+      }
+    ]
+  },
+  {
+    "id": "q6",
+    "prompt": "What's your living environment preference?",
+    "choices": [
+      {
+        "id": "urban-core",
+        "label": "Urban Core",
+        "weights": { "NY": 5, "CA": 4, "IL": 3, "MA": 3, "WA": 2 }
+      },
+      {
+        "id": "suburbs",
+        "label": "Suburbs",
+        "weights": { "TX": 3, "FL": 3, "NC": 3, "VA": 3, "GA": 2 }
+      },
+      {
+        "id": "small-town",
+        "label": "Small Town",
+        "weights": { "VT": 3, "ME": 3, "MT": 2, "ID": 2, "NH": 2 }
+      },
+      {
+        "id": "rural",
+        "label": "Rural",
+        "weights": { "MT": 3, "WY": 3, "ID": 3, "VT": 2, "ME": 2 }
+      }
+    ]
+  },
+  {
+    "id": "q7",
+    "prompt": "How important is a vibrant nightlife and social scene?",
+    "choices": [
+      {
+        "id": "very-important-nightlife",
+        "label": "Very Important",
+        "weights": { "NY": 5, "CA": 4, "FL": 4, "TX": 3, "NV": 5 }
+      },
+      {
+        "id": "somewhat-important-nightlife",
+        "label": "Somewhat Important",
+        "weights": { "CO": 3, "WA": 2, "NC": 2, "GA": 2, "AZ": 2 }
+      },
+      {
+        "id": "not-important-nightlife",
+        "label": "Not Important",
+        "weights": { "VT": 3, "ME": 3, "ID": 2, "MT": 2, "NH": 2 }
+      }
+    ]
+  },
+  {
+    "id": "q8",
+    "prompt": "What's your cost of living tolerance?",
+    "choices": [
+      {
+        "id": "budget-conscious",
+        "label": "Budget Conscious",
+        "weights": { "TX": 4, "TN": 4, "NC": 3, "GA": 3, "FL": 2 }
+      },
+      {
+        "id": "moderate-cost",
+        "label": "Moderate",
+        "weights": { "CO": 3, "NC": 3, "VA": 2, "AZ": 2, "NV": 2 }
+      },
+      {
+        "id": "willing-to-pay",
+        "label": "Willing to Pay for Quality",
+        "weights": { "CA": 3, "NY": 3, "WA": 3, "MA": 2, "HI": 2 }
+      }
+    ]
+  },
+  {
+    "id": "q9",
+    "prompt": "How important is healthcare quality and accessibility?",
+    "choices": [
+      {
+        "id": "top-priority-healthcare",
+        "label": "Top Priority",
+        "weights": { "MA": 5, "NY": 4, "CA": 4, "MN": 3, "CO": 3 }
+      },
+      {
+        "id": "important-healthcare",
+        "label": "Important",
+        "weights": { "NC": 3, "VA": 3, "WA": 2, "PA": 2, "TX": 2 }
+      },
+      {
+        "id": "less-important-healthcare",
+        "label": "Less Important",
+        "weights": { "FL": 2, "TN": 2, "NV": 2, "ID": 1, "MT": 1 }
+      }
+    ]
+  },
+  {
+    "id": "q10",
+    "prompt": "How important is LGBTQ+ friendliness?",
+    "choices": [
+      {
+        "id": "very-important-lgbtq",
+        "label": "Very Important",
+        "weights": { "CA": 5, "NY": 5, "MA": 4, "WA": 4, "OR": 4 }
+      },
+      {
+        "id": "somewhat-important-lgbtq",
+        "label": "Somewhat Important",
+        "weights": { "CO": 3, "IL": 3, "NC": 2, "VA": 2, "NV": 2 }
+      },
+      {
+        "id": "not-important-lgbtq",
+        "label": "Not Important",
+        "weights": { "TX": 2, "FL": 2, "TN": 2, "ID": 2, "AL": 2 }
+      }
+    ]
+  }
+]
