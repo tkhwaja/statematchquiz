@@ -65,7 +65,7 @@ const Checkout = () => {
               </div>
 
               <div className="text-center text-sm text-muted-foreground">
-                <p>✓ Instant access to your Top 3 matches</p>
+                <p>✓ Instant access to your Top 5 matches</p>
                 <p>✓ Detailed AI-powered insights</p>
                 <p>✓ Downloadable PDF report</p>
                 <p>✓ Delivered to your email</p>

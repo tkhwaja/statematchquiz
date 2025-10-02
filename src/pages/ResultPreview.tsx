@@ -85,7 +85,7 @@ const ResultPreview = () => {
           {/* Unlock CTA */}
           <Card className="bg-gradient-to-br from-primary/10 to-accent/10 border-2 border-primary/20 mb-8">
             <CardContent className="p-8 text-center">
-              <h3 className="text-2xl font-bold mb-2">Your Top 3 picks are ready!</h3>
+              <h3 className="text-2xl font-bold mb-2">Your Top 5 picks are ready!</h3>
               <p className="text-muted-foreground mb-6">
                 Unlock them to see why they're a perfect fit, including detailed insights on climate, 
                 cost of living, healthcare, and more.

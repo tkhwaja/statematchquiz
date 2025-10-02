@@ -114,16 +114,14 @@ const ResultFull = () => {
                       </ul>
                     </div>
 
-                    {index < 3 && (
-                      <div className="pt-4 border-t bg-accent/10 -mx-6 px-6 py-4 -mb-6">
-                        <p className="text-sm italic text-muted-foreground">
-                          🎯 This location ranks in your top 3 because it aligns strongly with your 
-                          preferences for {stateData?.politics.toLowerCase()} values, {stateData?.climate.toLowerCase()} climate, 
-                          and {stateData?.cost_of_living.toLowerCase()} cost of living. 
-                          {result.city} offers the best combination of your priorities within {stateData?.state_name}.
-                        </p>
-                      </div>
-                    )}
+                    <div className="pt-4 border-t bg-accent/10 -mx-6 px-6 py-4 -mb-6">
+                      <p className="text-sm italic text-muted-foreground">
+                        🎯 This location ranks #{index + 1} because it aligns strongly with your 
+                        preferences for {stateData?.politics.toLowerCase()} values, {stateData?.climate.toLowerCase()} climate, 
+                        and {stateData?.cost_of_living.toLowerCase()} cost of living. 
+                        {result.city} offers the best combination of your priorities within {stateData?.state_name}.
+                      </p>
+                    </div>
                   </CardContent>
                 </Card>
               );
