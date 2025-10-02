@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Download, MapPin } from "lucide-react";
 import { calculateScores } from "@/lib/scoring";
 import { StateScore, AnswerMap } from "@/lib/types";
 import statesData from "@/data/states.json";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 import CloudBackground from "@/components/CloudBackground";
 
 const ResultFull = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [results, setResults] = useState<StateScore[]>([]);
+  const [emailSent, setEmailSent] = useState(false);
 
   useEffect(() => {
     const savedAnswers = sessionStorage.getItem("quizAnswers");
@@ -22,14 +26,45 @@ const ResultFull = () => {
     const answers: AnswerMap = JSON.parse(savedAnswers);
     const scores = calculateScores(answers);
     setResults(scores);
-  }, [navigate]);
+
+    // Check if coming from successful payment
+    const sessionId = searchParams.get("session_id");
+    const savedEmail = sessionStorage.getItem("reportEmail");
+    
+    if (sessionId && savedEmail && !emailSent) {
+      // Send email with report
+      sendReportEmail(savedEmail, scores);
+    }
+  }, [navigate, searchParams, emailSent]);
+
+  const sendReportEmail = async (email: string, scores: StateScore[]) => {
+    try {
+      const { error } = await supabase.functions.invoke("send-report", {
+        body: { email, results: scores, statesData },
+      });
+
+      if (error) throw error;
+
+      toast.success("Report sent to your email!");
+      setEmailSent(true);
+      sessionStorage.removeItem("reportEmail");
+    } catch (error: any) {
+      console.error("Email sending error:", error);
+      toast.error("Failed to send email. Please contact support.");
+    }
+  };
 
   const getStateData = (stateCode: string) => {
     return statesData.find(s => s.state_code === stateCode);
   };
 
   const handleDownload = () => {
-    alert("PDF download feature coming soon!");
+    const savedEmail = sessionStorage.getItem("reportEmail");
+    if (savedEmail && results.length > 0 && !emailSent) {
+      sendReportEmail(savedEmail, results);
+    } else {
+      toast.info("Report already sent to your email!");
+    }
   };
 
   return (
@@ -45,7 +80,7 @@ const ResultFull = () => {
             </p>
             <Button variant="hero" size="lg" onClick={handleDownload}>
               <Download className="mr-2 h-5 w-5" />
-              Download Full Report (PDF)
+              {emailSent ? "Resend Report to Email" : "Send Report to Email"}
             </Button>
           </div>
 

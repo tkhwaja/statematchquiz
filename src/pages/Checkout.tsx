@@ -4,6 +4,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Lock } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 import CloudBackground from "@/components/CloudBackground";
 
 const Checkout = () => {
@@ -12,12 +14,39 @@ const Checkout = () => {
 
   const handleCheckout = async () => {
     setIsLoading(true);
-    // TODO: Integrate Stripe Checkout
-    // For now, just simulate the checkout process
-    setTimeout(() => {
-      alert("Checkout integration coming soon! For demo, proceeding to full report.");
-      window.location.href = "/result/full";
-    }, 1000);
+    try {
+      // Get quiz answers from session storage
+      const savedAnswers = sessionStorage.getItem("quizAnswers");
+      if (!savedAnswers) {
+        toast.error("No quiz answers found. Please retake the quiz.");
+        window.location.href = "/";
+        return;
+      }
+
+      const answers = JSON.parse(savedAnswers);
+
+      // Save email to session storage for later use
+      sessionStorage.setItem("reportEmail", email);
+
+      // Call the edge function to create checkout session
+      const { data, error } = await supabase.functions.invoke("create-payment", {
+        body: { email, answers },
+      });
+
+      if (error) throw error;
+
+      if (data?.url) {
+        // Open Stripe checkout in new tab
+        window.open(data.url, "_blank");
+      } else {
+        throw new Error("No checkout URL returned");
+      }
+    } catch (error: any) {
+      console.error("Checkout error:", error);
+      toast.error(error.message || "Failed to start checkout process");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -33,7 +62,7 @@ const Checkout = () => {
             <CardContent className="space-y-6">
               <div className="bg-primary/10 p-6 rounded-lg text-center">
                 <Lock className="h-12 w-12 text-primary mx-auto mb-3" />
-                <div className="text-3xl font-bold mb-2">$9.99</div>
+                <div className="text-3xl font-bold mb-2">$6.99</div>
                 <p className="text-sm text-muted-foreground">One-time purchase</p>
               </div>
 
