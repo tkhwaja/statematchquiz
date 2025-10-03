@@ -13,7 +13,7 @@ serve(async (req) => {
   }
 
   try {
-    const { email, answers } = await req.json();
+    const { email, answers, origin } = await req.json();
     
     if (!email || !answers) {
       throw new Error("Email and answers are required");
@@ -46,8 +46,8 @@ serve(async (req) => {
         },
       ],
       mode: "payment",
-      success_url: `${req.headers.get("origin")}/result-full?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${req.headers.get("origin")}/checkout`,
+      success_url: `${origin}/result-full?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${origin}/checkout`,
       metadata: {
         email,
         answers: JSON.stringify(answers),

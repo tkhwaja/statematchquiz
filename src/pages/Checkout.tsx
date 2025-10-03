@@ -30,7 +30,11 @@ const Checkout = () => {
 
       // Call the edge function to create checkout session
       const { data, error } = await supabase.functions.invoke("create-payment", {
-        body: { email, answers },
+        body: { 
+          email, 
+          answers,
+          origin: window.location.origin 
+        },
       });
 
       if (error) throw error;
