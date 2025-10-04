@@ -50,7 +50,6 @@ serve(async (req) => {
       cancel_url: `${origin}/checkout`,
       metadata: {
         email,
-        answers: JSON.stringify(answers),
       },
     });
 

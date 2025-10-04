@@ -33,6 +33,7 @@ export function calculateScores(answers: AnswerMap): StateScore[] {
         score
       };
     })
+    .filter(result => result.city) // Only include states with valid city data
     .sort((a, b) => b.score - a.score);
 
   // Return top 5

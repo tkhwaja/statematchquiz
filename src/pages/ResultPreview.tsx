@@ -25,7 +25,7 @@ const ResultPreview = () => {
   }, [navigate]);
 
   const lockedResults = results.slice(0, 3);
-  const unlockedResults = results.slice(3, 5);
+  const unlockedResults = results.slice(3, 5).filter(r => r.state && r.city);
 
   const getStateData = (stateCode: string) => {
     return statesData.find(s => s.state_code === stateCode);
