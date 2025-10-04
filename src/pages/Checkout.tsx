@@ -13,6 +13,13 @@ const Checkout = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleCheckout = async () => {
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email || !emailRegex.test(email.trim())) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+
     setIsLoading(true);
     try {
       // Get quiz answers from session storage
@@ -26,20 +33,30 @@ const Checkout = () => {
       const answers = JSON.parse(savedAnswers);
 
       // Save email to session storage for later use
-      sessionStorage.setItem("reportEmail", email);
+      sessionStorage.setItem("reportEmail", email.trim());
+
+      console.log("Creating payment session...");
 
       // Call the edge function to create checkout session
       const { data, error } = await supabase.functions.invoke("create-payment", {
         body: { 
-          email, 
+          email: email.trim(), 
           answers,
           origin: window.location.origin 
         },
       });
 
-      if (error) throw error;
+      if (error) {
+        console.error("Supabase function error:", error);
+        throw error;
+      }
+
+      console.log("Payment session response:", data);
 
       if (data?.url) {
+        console.log("Redirecting to Stripe:", data.url);
+        // Add a small delay to ensure state is saved
+        await new Promise(resolve => setTimeout(resolve, 100));
         // Redirect to Stripe checkout in same tab to preserve sessionStorage
         window.location.href = data.url;
       } else {
@@ -48,7 +65,6 @@ const Checkout = () => {
     } catch (error: any) {
       console.error("Checkout error:", error);
       toast.error(error.message || "Failed to start checkout process");
-    } finally {
       setIsLoading(false);
     }
   };
