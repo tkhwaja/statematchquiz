@@ -40,8 +40,8 @@ const Checkout = () => {
       if (error) throw error;
 
       if (data?.url) {
-        // Open Stripe checkout in new tab
-        window.open(data.url, "_blank");
+        // Redirect to Stripe checkout in same tab to preserve sessionStorage
+        window.location.href = data.url;
       } else {
         throw new Error("No checkout URL returned");
       }
