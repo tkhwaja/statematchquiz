@@ -46,7 +46,7 @@ serve(async (req) => {
         },
       ],
       mode: "payment",
-      success_url: `${origin}/result-full?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${origin}/result/full?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/checkout`,
       metadata: {
         email,
