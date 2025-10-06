@@ -8,6 +8,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import heroLandscape from "@/assets/hero-landscape.jpg";
+import CustomerSupportChat from "@/components/CustomerSupportChat";
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -281,6 +282,9 @@ const Landing = () => {
           </div>
         </footer>
       </div>
+
+      {/* Customer Support Chat Widget */}
+      <CustomerSupportChat />
     </div>
   );
 };
