@@ -54,11 +54,11 @@ const Checkout = () => {
       console.log("Payment session response:", data);
 
       if (data?.url) {
-        console.log("Redirecting to Stripe:", data.url);
-        // Add a small delay to ensure state is saved
-        await new Promise(resolve => setTimeout(resolve, 100));
-        // Redirect to Stripe checkout in same tab to preserve sessionStorage
-        window.location.href = data.url;
+        console.log("Opening Stripe checkout:", data.url);
+        // Open Stripe checkout in a new tab
+        window.open(data.url, '_blank');
+        toast.success("Opening Stripe checkout in a new tab...");
+        setIsLoading(false);
       } else {
         throw new Error("No checkout URL returned");
       }
