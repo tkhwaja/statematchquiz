@@ -111,7 +111,7 @@ const Privacy = () => {
               <li><strong>Data Portability:</strong> Request transfer of your information to another service</li>
             </ul>
             <p className="mt-2">
-              To exercise any of these rights, please contact us at privacy@statematch.com.
+              To exercise any of these rights, please contact us at privacy@statematchquiz.com.
             </p>
           </section>
 
@@ -149,8 +149,8 @@ const Privacy = () => {
               If you have any questions about this Privacy Policy or our data practices, please contact us at:
             </p>
             <p className="mt-2">
-              Email: privacy@statematch.com<br />
-              Support: support@statematch.com
+              Email: privacy@statematchquiz.com<br />
+              Support: support@statematchquiz.com
             </p>
           </section>
         </div>

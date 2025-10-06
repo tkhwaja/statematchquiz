@@ -44,7 +44,7 @@ serve(async (req) => {
               <div style="display: inline-block; background: #4F46E5; color: white; padding: 5px 15px; border-radius: 20px; font-size: 14px; font-weight: bold; margin-bottom: 10px;">
                 #${index + 1} Match
               </div>
-              <h2 style="color: #111; margin: 5px 0; font-size: 28px; font-weight: bold;">
+              <h2 style="color: #1a1a1a; margin: 5px 0; font-size: 28px; font-weight: bold;">
                 ${stateData?.state_name || result.state}
               </h2>
               <div style="display: flex; align-items: center; gap: 8px; margin-top: 8px;">
@@ -210,7 +210,7 @@ serve(async (req) => {
     `;
 
     const emailResponse = await resend.emails.send({
-      from: "StateMatch <onboarding@resend.dev>",
+      from: "StateMatch Quiz <support@statematchquiz.com>",
       to: [email],
       subject: "Your StateMatch Report - Top 5 Recommendations",
       html: htmlContent,

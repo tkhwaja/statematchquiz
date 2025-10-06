@@ -50,7 +50,7 @@ const Terms = () => {
               We offer a full refund within 30 days of purchase if you are not satisfied with your report for any reason. To request a refund:
             </p>
             <ul className="list-disc pl-6 space-y-2 mb-4">
-              <li>Contact us at support@statematch.com within 30 days of your purchase</li>
+              <li>Contact us at support@statematchquiz.com within 30 days of your purchase</li>
               <li>Include your purchase confirmation email or transaction ID</li>
               <li>Provide a brief reason for the refund request (optional but appreciated)</li>
             </ul>
@@ -118,7 +118,7 @@ const Terms = () => {
               If you have any questions about these Terms of Service, please contact us at:
             </p>
             <p className="mt-2">
-              Email: support@statematch.com
+              Email: support@statematchquiz.com
             </p>
           </section>
         </div>

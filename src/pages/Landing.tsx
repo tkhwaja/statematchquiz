@@ -262,8 +262,8 @@ const Landing = () => {
                 <h3 className="text-white font-semibold mb-4">Support</h3>
                 <ul className="space-y-2">
                   <li>
-                    <a href="mailto:support@statematch.com" className="text-white/70 hover:text-white text-sm transition-colors">
-                      support@statematch.com
+                    <a href="mailto:support@statematchquiz.com" className="text-white/70 hover:text-white text-sm transition-colors">
+                      support@statematchquiz.com
                     </a>
                   </li>
                   <li>
