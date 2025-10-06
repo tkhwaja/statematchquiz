@@ -13,7 +13,7 @@ const ResultPreview = () => {
   const [results, setResults] = useState<StateScore[]>([]);
 
   useEffect(() => {
-    const savedAnswers = sessionStorage.getItem("quizAnswers");
+    const savedAnswers = localStorage.getItem("quizAnswers");
     if (!savedAnswers) {
       navigate("/");
       return;

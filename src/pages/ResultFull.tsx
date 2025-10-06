@@ -17,7 +17,7 @@ const ResultFull = () => {
   const [emailSent, setEmailSent] = useState(false);
 
   useEffect(() => {
-    const savedAnswers = sessionStorage.getItem("quizAnswers");
+    const savedAnswers = localStorage.getItem("quizAnswers");
     if (!savedAnswers) {
       navigate("/");
       return;
@@ -29,7 +29,7 @@ const ResultFull = () => {
 
     // Check if coming from successful payment
     const sessionId = searchParams.get("session_id");
-    const savedEmail = sessionStorage.getItem("reportEmail");
+    const savedEmail = localStorage.getItem("reportEmail");
     
     if (sessionId && savedEmail && !emailSent) {
       // Send email with report
@@ -47,7 +47,7 @@ const ResultFull = () => {
 
       toast.success("Report sent to your email!");
       setEmailSent(true);
-      sessionStorage.removeItem("reportEmail");
+      localStorage.removeItem("reportEmail");
     } catch (error: any) {
       console.error("Email sending error:", error);
       toast.error("Failed to send email. Please contact support.");
@@ -59,7 +59,7 @@ const ResultFull = () => {
   };
 
   const handleDownload = () => {
-    const savedEmail = sessionStorage.getItem("reportEmail");
+    const savedEmail = localStorage.getItem("reportEmail");
     if (savedEmail && results.length > 0 && !emailSent) {
       sendReportEmail(savedEmail, results);
     } else {

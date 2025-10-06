@@ -22,8 +22,8 @@ const Checkout = () => {
 
     setIsLoading(true);
     try {
-      // Get quiz answers from session storage
-      const savedAnswers = sessionStorage.getItem("quizAnswers");
+      // Get quiz answers from local storage
+      const savedAnswers = localStorage.getItem("quizAnswers");
       if (!savedAnswers) {
         toast.error("No quiz answers found. Please retake the quiz.");
         window.location.href = "/";
@@ -32,8 +32,8 @@ const Checkout = () => {
 
       const answers = JSON.parse(savedAnswers);
 
-      // Save email to session storage for later use
-      sessionStorage.setItem("reportEmail", email.trim());
+      // Save email to local storage for later use
+      localStorage.setItem("reportEmail", email.trim());
 
       console.log("Creating payment session...");
 

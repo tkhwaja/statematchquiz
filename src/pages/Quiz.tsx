@@ -30,7 +30,7 @@ const Quiz = () => {
   const handleNext = () => {
     if (isLastQuestion) {
       // Store answers and navigate to results
-      sessionStorage.setItem("quizAnswers", JSON.stringify(answers));
+      localStorage.setItem("quizAnswers", JSON.stringify(answers));
       navigate("/result/preview");
     } else {
       setCurrentQuestion(prev => prev + 1);
