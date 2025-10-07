@@ -32,3 +32,9 @@ export interface StateMetadata {
 }
 
 export type AnswerMap = Record<string, string>;
+
+export interface ShareData {
+  title: string;
+  text: string;
+  url: string;
+}

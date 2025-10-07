@@ -3,13 +3,15 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { usePostHog } from "@/contexts/PostHogContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Download, MapPin } from "lucide-react";
+import { Download, MapPin, Share2 } from "lucide-react";
 import { calculateScores } from "@/lib/scoring";
 import { StateScore, AnswerMap } from "@/lib/types";
 import statesData from "@/data/states.json";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import CloudBackground from "@/components/CloudBackground";
+import ShareDialog from "@/components/ShareDialog";
+import { generateShareText, getShareUrl, isWebShareSupported } from "@/lib/shareUtils";
 
 const ResultFull = () => {
   const navigate = useNavigate();
@@ -17,6 +19,7 @@ const ResultFull = () => {
   const [searchParams] = useSearchParams();
   const [results, setResults] = useState<StateScore[]>([]);
   const [emailSent, setEmailSent] = useState(false);
+  const [shareDialogOpen, setShareDialogOpen] = useState(false);
 
   useEffect(() => {
     posthog.capture('page_view', { page: 'result_full' });
@@ -72,6 +75,40 @@ const ResultFull = () => {
     }
   };
 
+  const handleShare = async () => {
+    if (results.length === 0) {
+      toast.error("No results to share");
+      return;
+    }
+
+    const shareText = generateShareText(results);
+    const shareUrl = getShareUrl();
+
+    posthog.capture('share_button_clicked');
+
+    if (isWebShareSupported()) {
+      try {
+        await navigator.share({
+          title: 'My StateMatch Results',
+          text: shareText,
+          url: shareUrl,
+        });
+        posthog.capture('share_completed', { method: 'native' });
+        toast.success("Thanks for sharing!");
+      } catch (error) {
+        // User cancelled share or error occurred
+        if ((error as Error).name !== 'AbortError') {
+          console.error('Share error:', error);
+          setShareDialogOpen(true);
+        }
+      }
+    } else {
+      // Fallback to dialog for desktop
+      setShareDialogOpen(true);
+      posthog.capture('share_dialog_opened');
+    }
+  };
+
   return (
     <div className="min-h-screen py-12">
       <CloudBackground />
@@ -83,11 +120,24 @@ const ResultFull = () => {
             <p className="text-lg text-muted-foreground mb-6">
               Here are your top 5 personalized recommendations
             </p>
-            <Button variant="hero" size="lg" onClick={handleDownload}>
-              <Download className="mr-2 h-5 w-5" />
-              {emailSent ? "Resend Report to Email" : "Send Report to Email"}
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button variant="hero" size="lg" onClick={handleDownload}>
+                <Download className="mr-2 h-5 w-5" />
+                {emailSent ? "Resend Report to Email" : "Send Report to Email"}
+              </Button>
+              <Button variant="outline" size="lg" onClick={handleShare}>
+                <Share2 className="mr-2 h-5 w-5" />
+                Share Results
+              </Button>
+            </div>
           </div>
+
+          <ShareDialog
+            open={shareDialogOpen}
+            onOpenChange={setShareDialogOpen}
+            shareText={generateShareText(results)}
+            shareUrl={getShareUrl()}
+          />
 
           <div className="space-y-6">
             {results.map((result, index) => {
