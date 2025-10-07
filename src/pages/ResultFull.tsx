@@ -42,6 +42,16 @@ const ResultFull = () => {
     if (sessionId && savedEmail && !emailSent) {
       // Send email with report
       sendReportEmail(savedEmail, scores);
+      
+      // Track Google Ads conversion
+      if (typeof window !== 'undefined' && (window as any).gtag) {
+        (window as any).gtag('event', 'conversion', {
+          'send_to': 'AW-17632592454/YOUR_CONVERSION_LABEL',
+          'value': 5.00,
+          'currency': 'USD',
+          'transaction_id': sessionId
+        });
+      }
     }
   }, [navigate, searchParams, emailSent]);
 
