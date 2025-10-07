@@ -5,8 +5,14 @@ const PostHogContext = createContext(null);
 
 export const PostHogProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
-    // Replace with your PostHog project API key from https://app.posthog.com/project/settings
-    posthog.init('YOUR_POSTHOG_API_KEY', {
+    const apiKey = import.meta.env.VITE_POSTHOG_API_KEY;
+    
+    if (!apiKey) {
+      console.warn('PostHog API key not found');
+      return;
+    }
+
+    posthog.init(apiKey, {
       api_host: 'https://app.posthog.com',
       autocapture: false,
       capture_pageview: false,
