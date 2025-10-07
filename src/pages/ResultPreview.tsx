@@ -48,25 +48,16 @@ const ResultPreview = () => {
             </p>
           </div>
 
-          {/* Locked Results */}
+          {/* Unlocked Results */}
           <div className="space-y-6 mb-8">
-            {lockedResults.map((result, index) => {
+            {unlockedResults.map((result, index) => {
               const stateData = getStateData(result.state);
               return (
-                <Card key={result.state} className="relative overflow-hidden">
-                  <div className="absolute inset-0 blur-card bg-muted/50 backdrop-blur-md z-10" />
-                  <div className="absolute inset-0 flex items-center justify-center z-20">
-                    <div className="text-center">
-                      <Lock className="h-12 w-12 text-primary mx-auto mb-3" />
-                      <p className="text-lg font-semibold">Rank #{index + 1}</p>
-                      <p className="text-sm text-muted-foreground">Unlock to see details</p>
-                    </div>
-                  </div>
-                  
+                <Card key={result.state}>
                   <CardHeader>
                     <div className="flex items-start justify-between">
                       <div>
-                        <div className="text-3xl font-bold mb-1">#{index + 1}</div>
+                        <div className="text-3xl font-bold mb-1">#{5 - index}</div>
                         <CardTitle className="text-2xl">{stateData?.state_name}</CardTitle>
                       </div>
                       <div className="text-right">
@@ -79,6 +70,25 @@ const ResultPreview = () => {
                     <div className="flex items-center gap-2 mb-4">
                       <MapPin className="h-5 w-5 text-accent" />
                       <span className="text-lg font-medium">{result.city}</span>
+                    </div>
+                    <div className="grid md:grid-cols-2 gap-4 text-sm">
+                      <div>
+                        <span className="font-semibold">Climate:</span> {stateData?.climate}
+                      </div>
+                      <div>
+                        <span className="font-semibold">Cost of Living:</span> {stateData?.cost_of_living}
+                      </div>
+                      <div>
+                        <span className="font-semibold">Politics:</span> {stateData?.politics}
+                      </div>
+                      <div>
+                        <span className="font-semibold">Healthcare:</span> {stateData?.healthcare_quality}
+                      </div>
+                    </div>
+                    <div className="mt-4">
+                      <p className="text-sm text-muted-foreground">
+                        {stateData?.highlights.slice(0, 2).join(" • ")}
+                      </p>
                     </div>
                   </CardContent>
                 </Card>
@@ -103,16 +113,25 @@ const ResultPreview = () => {
             </CardContent>
           </Card>
 
-          {/* Unlocked Results */}
+          {/* Locked Results */}
           <div className="space-y-6">
-            {unlockedResults.map((result, index) => {
+            {lockedResults.map((result, index) => {
               const stateData = getStateData(result.state);
               return (
-                <Card key={result.state}>
+                <Card key={result.state} className="relative overflow-hidden">
+                  <div className="absolute inset-0 blur-card bg-muted/50 backdrop-blur-md z-10" />
+                  <div className="absolute inset-0 flex items-center justify-center z-20">
+                    <div className="text-center">
+                      <Lock className="h-12 w-12 text-primary mx-auto mb-3" />
+                      <p className="text-lg font-semibold">Rank #{3 - index}</p>
+                      <p className="text-sm text-muted-foreground">Unlock to see details</p>
+                    </div>
+                  </div>
+                  
                   <CardHeader>
                     <div className="flex items-start justify-between">
                       <div>
-                        <div className="text-3xl font-bold mb-1">#{index + 4}</div>
+                        <div className="text-3xl font-bold mb-1">#{3 - index}</div>
                         <CardTitle className="text-2xl">{stateData?.state_name}</CardTitle>
                       </div>
                       <div className="text-right">
