@@ -1,15 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { usePostHog } from "@/contexts/PostHogContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Download, MapPin } from "lucide-react";
+import { Download, MapPin, Share2 } from "lucide-react";
 import { calculateScores } from "@/lib/scoring";
 import { StateScore, AnswerMap } from "@/lib/types";
 import statesData from "@/data/states.json";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import CloudBackground from "@/components/CloudBackground";
+import ShareableResultImage from "@/components/ShareableResultImage";
+import html2canvas from "html2canvas";
 
 const ResultFull = () => {
   const navigate = useNavigate();
@@ -17,6 +19,8 @@ const ResultFull = () => {
   const [searchParams] = useSearchParams();
   const [results, setResults] = useState<StateScore[]>([]);
   const [emailSent, setEmailSent] = useState(false);
+  const [isGeneratingImage, setIsGeneratingImage] = useState(false);
+  const shareableImageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     posthog.capture('page_view', { page: 'result_full' });
@@ -72,6 +76,44 @@ const ResultFull = () => {
     }
   };
 
+  const handleShareImage = async () => {
+    if (!shareableImageRef.current) return;
+    
+    setIsGeneratingImage(true);
+    toast.loading("Generating your shareable image...");
+    
+    try {
+      const canvas = await html2canvas(shareableImageRef.current, {
+        scale: 1,
+        backgroundColor: null,
+        logging: false,
+      });
+      
+      canvas.toBlob((blob) => {
+        if (!blob) {
+          throw new Error("Failed to generate image");
+        }
+        
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.download = "my-statematch-results.png";
+        link.href = url;
+        link.click();
+        URL.revokeObjectURL(url);
+        
+        toast.dismiss();
+        toast.success("Image downloaded! Share it on social media!");
+        posthog.capture('share_image_generated');
+      }, "image/png");
+    } catch (error) {
+      console.error("Error generating image:", error);
+      toast.dismiss();
+      toast.error("Failed to generate image. Please try again.");
+    } finally {
+      setIsGeneratingImage(false);
+    }
+  };
+
   return (
     <div className="min-h-screen py-12">
       <CloudBackground />
@@ -83,10 +125,21 @@ const ResultFull = () => {
             <p className="text-lg text-muted-foreground mb-6">
               Here are your top 5 personalized recommendations
             </p>
-            <Button variant="hero" size="lg" onClick={handleDownload}>
-              <Download className="mr-2 h-5 w-5" />
-              {emailSent ? "Resend Report to Email" : "Send Report to Email"}
-            </Button>
+            <div className="flex gap-4 justify-center">
+              <Button variant="hero" size="lg" onClick={handleDownload}>
+                <Download className="mr-2 h-5 w-5" />
+                {emailSent ? "Resend Report to Email" : "Send Report to Email"}
+              </Button>
+              <Button 
+                variant="outline" 
+                size="lg" 
+                onClick={handleShareImage}
+                disabled={isGeneratingImage}
+              >
+                <Share2 className="mr-2 h-5 w-5" />
+                Share on Social Media
+              </Button>
+            </div>
           </div>
 
           <div className="space-y-6">
@@ -264,6 +317,13 @@ const ResultFull = () => {
                 </Card>
               );
             })}
+          </div>
+
+          {/* Hidden shareable image for generation */}
+          <div className="fixed -left-[9999px] top-0">
+            <div ref={shareableImageRef}>
+              <ShareableResultImage results={results} />
+            </div>
           </div>
         </div>
       </div>
