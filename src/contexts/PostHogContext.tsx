@@ -8,7 +8,7 @@ export const PostHogProvider = ({ children }: { children: React.ReactNode }) => 
     posthog.init('phc_SsJXq6AmOHYQsp8IXiyowjjFGcjYpq7FIzE4cXI3c8k', {
       api_host: 'https://app.posthog.com',
       autocapture: false,
-      capture_pageview: false,
+      capture_pageview: true,
     });
   }, []);
 

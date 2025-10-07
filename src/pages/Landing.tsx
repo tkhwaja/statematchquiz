@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/accordion";
 import heroLandscape from "@/assets/hero-landscape.jpg";
 import CustomerSupportChat from "@/components/CustomerSupportChat";
+import CloudBackground from "@/components/CloudBackground";
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -27,6 +28,8 @@ const Landing = () => {
 
   return (
     <div className="min-h-screen relative">
+      <CloudBackground />
+      
       {/* Background Image */}
       <div 
         className="fixed inset-0 -z-10 bg-cover bg-center bg-no-repeat"
