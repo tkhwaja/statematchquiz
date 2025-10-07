@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { usePostHog } from "@/contexts/PostHogContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Lock, MapPin } from "lucide-react";
@@ -10,9 +11,12 @@ import CloudBackground from "@/components/CloudBackground";
 
 const ResultPreview = () => {
   const navigate = useNavigate();
+  const posthog = usePostHog();
   const [results, setResults] = useState<StateScore[]>([]);
 
   useEffect(() => {
+    posthog.capture('page_view', { page: 'result_preview' });
+    
     const savedAnswers = localStorage.getItem("quizAnswers");
     if (!savedAnswers) {
       navigate("/");

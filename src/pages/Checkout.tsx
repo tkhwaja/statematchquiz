@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { usePostHog } from "@/contexts/PostHogContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -9,8 +10,14 @@ import { toast } from "sonner";
 import CloudBackground from "@/components/CloudBackground";
 
 const Checkout = () => {
+  const posthog = usePostHog();
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    posthog.capture('page_view', { page: 'checkout' });
+    posthog.capture('checkout_initiated');
+  }, []);
 
   const handleCheckout = async () => {
     // Validate email format
@@ -55,6 +62,7 @@ const Checkout = () => {
 
       if (data?.url) {
         console.log("Opening Stripe checkout:", data.url);
+        posthog.capture('checkout_started', { email: email.trim() });
         // Open Stripe checkout in a new tab
         window.open(data.url, '_blank');
         toast.success("Opening Stripe checkout in a new tab...");

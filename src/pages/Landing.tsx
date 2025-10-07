@@ -1,6 +1,8 @@
+import { useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { MapPin, Heart, Home, Sparkles, Star, HelpCircle } from "lucide-react";
+import { usePostHog } from "@/contexts/PostHogContext";
 import {
   Accordion,
   AccordionContent,
@@ -12,6 +14,16 @@ import CustomerSupportChat from "@/components/CustomerSupportChat";
 
 const Landing = () => {
   const navigate = useNavigate();
+  const posthog = usePostHog();
+
+  useEffect(() => {
+    posthog.capture('page_view', { page: 'landing' });
+  }, []);
+
+  const handleStartQuiz = () => {
+    posthog.capture('quiz_started');
+    navigate("/quiz");
+  };
 
   return (
     <div className="min-h-screen relative">
@@ -46,7 +58,7 @@ const Landing = () => {
           <Button
             size="lg"
             variant="hero"
-            onClick={() => navigate("/quiz")}
+            onClick={handleStartQuiz}
             className="text-lg px-12 py-6 h-auto"
           >
             Start Quiz

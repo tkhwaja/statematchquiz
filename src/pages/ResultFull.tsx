@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { usePostHog } from "@/contexts/PostHogContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Download, MapPin } from "lucide-react";
@@ -12,11 +13,15 @@ import CloudBackground from "@/components/CloudBackground";
 
 const ResultFull = () => {
   const navigate = useNavigate();
+  const posthog = usePostHog();
   const [searchParams] = useSearchParams();
   const [results, setResults] = useState<StateScore[]>([]);
   const [emailSent, setEmailSent] = useState(false);
 
   useEffect(() => {
+    posthog.capture('page_view', { page: 'result_full' });
+    posthog.capture('purchase_completed');
+    
     const savedAnswers = localStorage.getItem("quizAnswers");
     if (!savedAnswers) {
       navigate("/");

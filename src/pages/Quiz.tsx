@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { usePostHog } from "@/contexts/PostHogContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -12,8 +13,13 @@ import { AnswerMap } from "@/lib/types";
 
 const Quiz = () => {
   const navigate = useNavigate();
+  const posthog = usePostHog();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<AnswerMap>({});
+
+  useEffect(() => {
+    posthog.capture('page_view', { page: 'quiz' });
+  }, []);
 
   const question = questionsData[currentQuestion];
   const isLastQuestion = currentQuestion === questionsData.length - 1;
@@ -31,6 +37,7 @@ const Quiz = () => {
     if (isLastQuestion) {
       // Store answers and navigate to results
       localStorage.setItem("quizAnswers", JSON.stringify(answers));
+      posthog.capture('quiz_completed');
       navigate("/result/preview");
     } else {
       setCurrentQuestion(prev => prev + 1);
