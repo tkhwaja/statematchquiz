@@ -15,7 +15,7 @@ export const generateShareText = (results: StateScore[]): string => {
 };
 
 export const getShareUrl = (): string => {
-  return window.location.origin;
+  return window.location.href;
 };
 
 export const isWebShareSupported = (): boolean => {
