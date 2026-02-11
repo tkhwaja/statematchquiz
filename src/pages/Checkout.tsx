@@ -61,12 +61,8 @@ const Checkout = () => {
       console.log("Payment session response:", data);
 
       if (data?.url) {
-        console.log("Opening Stripe checkout:", data.url);
         posthog.capture('checkout_started', { email: email.trim() });
-        // Open Stripe checkout in a new tab
-        window.open(data.url, '_blank');
-        toast.success("Opening Stripe checkout in a new tab...");
-        setIsLoading(false);
+        window.location.href = data.url;
       } else {
         throw new Error("No checkout URL returned");
       }
