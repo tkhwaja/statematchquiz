@@ -38,7 +38,7 @@ const Quiz = () => {
       // Store answers and navigate to results
       localStorage.setItem("quizAnswers", JSON.stringify(answers));
       posthog.capture('quiz_completed');
-      navigate("/result/preview");
+      navigate("/result/email-capture");
     } else {
       setCurrentQuestion(prev => prev + 1);
     }

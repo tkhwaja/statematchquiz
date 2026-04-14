@@ -11,6 +11,7 @@ import Checkout from "./pages/Checkout";
 import ResultFull from "./pages/ResultFull";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
+import EmailCapture from "./pages/EmailCapture";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -25,6 +26,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/quiz" element={<Quiz />} />
+          <Route path="/result/email-capture" element={<EmailCapture />} />
           <Route path="/result/preview" element={<ResultPreview />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/result/full" element={<ResultFull />} />
