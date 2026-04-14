@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { usePostHog } from "@/contexts/PostHogContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Download, MapPin, Share2 } from "lucide-react";
+import { Download, MapPin, Share2, Sparkles } from "lucide-react";
 import { calculateScores } from "@/lib/scoring";
 import { StateScore, AnswerMap } from "@/lib/types";
 import statesData from "@/data/states.json";
@@ -126,9 +126,9 @@ const ResultFull = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold mb-4">Your Complete StateMatch Report</h1>
+            <h1 className="text-4xl font-bold mb-4">Your Personalized Relocation Report</h1>
             <p className="text-lg text-muted-foreground mb-6">
-              Here are your top 5 personalized recommendations
+              Here are your top state matches with detailed insights
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button variant="hero" size="lg" onClick={handleDownload}>
@@ -325,6 +325,17 @@ const ResultFull = () => {
               );
             })}
           </div>
+
+          <Card className="mt-8 bg-gradient-to-br from-primary/5 to-accent/5">
+            <CardContent className="p-8 text-center">
+              <Sparkles className="h-12 w-12 text-primary mx-auto mb-4" />
+              <h3 className="text-xl font-bold mb-2">Your Detailed Relocation Analysis</h3>
+              <p className="text-muted-foreground">
+                Your personalized relocation report with tax calculations, neighborhood recommendations, 
+                and moving checklist is being prepared and will be emailed to you within 24 hours.
+              </p>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>

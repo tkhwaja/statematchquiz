@@ -4,7 +4,7 @@ import { usePostHog } from "@/contexts/PostHogContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Lock } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import CloudBackground from "@/components/CloudBackground";
@@ -17,6 +17,10 @@ const Checkout = () => {
   useEffect(() => {
     posthog.capture('page_view', { page: 'checkout' });
     posthog.capture('checkout_initiated');
+    const capturedEmail = localStorage.getItem("capturedEmail");
+    if (capturedEmail && !email) {
+      setEmail(capturedEmail);
+    }
   }, []);
 
   const handleCheckout = async () => {
@@ -49,7 +53,8 @@ const Checkout = () => {
         body: { 
           email: email.trim(), 
           answers,
-          origin: window.location.origin 
+          origin: window.location.origin,
+          tier: "relocation_report"
         },
       });
 
@@ -81,13 +86,13 @@ const Checkout = () => {
         <div className="max-w-lg mx-auto">
           <Card>
             <CardHeader>
-              <CardTitle className="text-2xl text-center">Unlock Your Full Report</CardTitle>
+              <CardTitle className="text-2xl text-center">Get Your Personalized Relocation Report</CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="bg-primary/10 p-6 rounded-lg text-center">
-                <Lock className="h-12 w-12 text-primary mx-auto mb-3" />
-                <div className="text-3xl font-bold mb-2">$6.99</div>
-                <p className="text-sm text-muted-foreground">One-time purchase</p>
+                <Sparkles className="h-12 w-12 text-primary mx-auto mb-3" />
+                <div className="text-3xl font-bold mb-2">$149</div>
+                <p className="text-sm text-muted-foreground">One-time purchase • 30-day money-back guarantee</p>
               </div>
 
               <div className="space-y-4">
@@ -118,10 +123,12 @@ const Checkout = () => {
               </div>
 
               <div className="text-center text-sm text-muted-foreground">
-                <p>✓ Instant access to your Top 5 matches</p>
-                <p>✓ Detailed AI-powered insights</p>
-                <p>✓ Downloadable PDF report</p>
-                <p>✓ Delivered to your email</p>
+                <p>✓ Cost of living comparison for your income</p>
+                <p>✓ State-by-state tax impact breakdown</p>
+                <p>✓ Neighborhood-level recommendations</p>
+                <p>✓ Step-by-step moving checklist</p>
+                <p>✓ Job market analysis for your field</p>
+                <p>✓ Downloadable PDF report delivered to your email</p>
               </div>
             </CardContent>
           </Card>
