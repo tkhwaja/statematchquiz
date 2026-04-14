@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { usePostHog } from "@/contexts/PostHogContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -245,6 +245,17 @@ const ResultPreview = () => {
             })}
           </div>
 
+          {/* Blog Link */}
+          <div className="mt-8 mb-4">
+            <Card className="p-6">
+              <h3 className="text-lg font-semibold mb-2">Learn More About Your Top States</h3>
+              <p className="text-muted-foreground text-sm mb-4">Read our guides on relocation, cost of living, and finding your perfect fit.</p>
+              <Link to="/blog">
+                <Button variant="outline">Read the Blog →</Button>
+              </Link>
+            </Card>
+          </div>
+
           {/* Tier 2 Upsell */}
           <Card className="bg-gradient-to-br from-primary/10 to-accent/10 border-2 border-primary/20 mt-12">
             <CardContent className="p-8 md:p-12">
@@ -281,8 +292,8 @@ const ResultPreview = () => {
               </div>
 
               <div className="text-center mt-8">
-                <div className="text-4xl font-bold text-primary">$149</div>
-                <div className="text-sm text-muted-foreground">One-time purchase</div>
+                <div className="text-4xl font-bold text-primary">Coming Soon</div>
+                <div className="text-sm text-muted-foreground">Join the waitlist to get early access and a launch discount</div>
               </div>
 
               <div className="text-center mt-6">
@@ -291,15 +302,12 @@ const ResultPreview = () => {
                   size="lg"
                   className="text-lg px-12 py-6 h-auto"
                   onClick={() => {
-                    posthog.capture('tier2_cta_clicked', { top_state: results[0]?.state });
+                    posthog.capture('waitlist_cta_clicked', { top_state: results[0]?.state });
                     navigate("/checkout");
                   }}
                 >
-                  Get My Relocation Report
+                  Join the Waitlist — Get Early Access
                 </Button>
-                <p className="text-sm text-muted-foreground mt-4">
-                  30-day money-back guarantee • Instant delivery
-                </p>
               </div>
             </CardContent>
           </Card>

@@ -42,6 +42,14 @@ const BlogPost = () => {
 
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-3xl mx-auto">
+          <nav className="flex items-center justify-between py-4 mb-8">
+            <Link to="/" className="font-bold text-xl">StateMatch</Link>
+            <div className="flex items-center gap-6">
+              <Link to="/blog" className="text-muted-foreground hover:text-foreground text-sm transition-colors">Blog</Link>
+              <Button variant="hero" size="sm" onClick={() => navigate("/quiz")}>Take the Quiz</Button>
+            </div>
+          </nav>
+
           <Link
             to="/blog"
             className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-8 transition-colors"

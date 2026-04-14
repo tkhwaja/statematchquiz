@@ -50,6 +50,30 @@ export type Database = {
         }
         Relationships: []
       }
+      tier2_waitlist: {
+        Row: {
+          email: string
+          id: string
+          joined_at: string | null
+          name: string | null
+          quiz_answers: Json | null
+        }
+        Insert: {
+          email: string
+          id?: string
+          joined_at?: string | null
+          name?: string | null
+          quiz_answers?: Json | null
+        }
+        Update: {
+          email?: string
+          id?: string
+          joined_at?: string | null
+          name?: string | null
+          quiz_answers?: Json | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

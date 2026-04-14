@@ -1,12 +1,14 @@
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { usePostHog } from "@/contexts/PostHogContext";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import CloudBackground from "@/components/CloudBackground";
 import { blogPosts } from "@/data/blog-posts";
 
 const Blog = () => {
+  const navigate = useNavigate();
   const posthog = usePostHog();
 
   useEffect(() => {
@@ -19,6 +21,13 @@ const Blog = () => {
 
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-5xl mx-auto">
+          <nav className="flex items-center justify-between py-4 mb-8">
+            <Link to="/" className="font-bold text-xl">StateMatch</Link>
+            <div className="flex items-center gap-6">
+              <Link to="/blog" className="text-muted-foreground hover:text-foreground text-sm transition-colors">Blog</Link>
+              <Button variant="hero" size="sm" onClick={() => navigate("/quiz")}>Take the Quiz</Button>
+            </div>
+          </nav>
           <div className="text-center mb-12">
             <h1 className="text-4xl font-bold mb-4">StateMatch Blog</h1>
             <p className="text-muted-foreground text-lg">
