@@ -8,11 +8,15 @@ import { Label } from "@/components/ui/label";
 import CloudBackground from "@/components/CloudBackground";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { calculateScores } from "@/lib/scoring";
+import { AnswerMap } from "@/lib/types";
+import statesData from "@/data/states.json";
 
 const EmailCapture = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const posthog = usePostHog();
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -26,6 +30,11 @@ const EmailCapture = () => {
   }, []);
 
   const handleSubmit = async () => {
+    if (!name.trim()) {
+      toast.error("Please enter your first name");
+      return;
+    }
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email || !emailRegex.test(email.trim())) {
       toast.error("Please enter a valid email address");
@@ -41,6 +50,7 @@ const EmailCapture = () => {
       const utmCampaign = searchParams.get("utm_campaign");
 
       await supabase.from("email_captures").insert({
+        name: name.trim(),
         email: email.trim(),
         quiz_answers: quizAnswers ? JSON.parse(quizAnswers) : null,
         utm_source: utmSource,
@@ -49,18 +59,27 @@ const EmailCapture = () => {
       });
 
       localStorage.setItem("capturedEmail", email.trim());
-      posthog.capture("email_captured");
+      localStorage.setItem("capturedName", name.trim());
+      posthog.capture("email_captured", { email: email.trim(), name: name.trim() });
+
+      // Calculate scores and send report email in background
+      if (quizAnswers) {
+        const answers: AnswerMap = JSON.parse(quizAnswers);
+        const scores = calculateScores(answers);
+
+        supabase.functions.invoke("send-report", {
+          body: { email: email.trim(), results: scores, statesData },
+        }).catch((error) => {
+          console.error("Failed to send report email:", error);
+        });
+      }
+
       navigate("/result/preview");
     } catch (error) {
       toast.error("Something went wrong. Please try again.");
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const handleSkip = () => {
-    posthog.capture("email_capture_skipped");
-    navigate("/result/preview");
   };
 
   return (
@@ -74,8 +93,22 @@ const EmailCapture = () => {
                 Your results are ready!
               </h1>
               <p className="text-muted-foreground mb-8">
-                Enter your email to see your personalized state matches.
+                Enter your name and email to get your personalized results — we'll send a copy to your inbox too.
               </p>
+
+              <div className="text-left mb-4">
+                <Label htmlFor="name" className="mb-2 block">
+                  First Name
+                </Label>
+                <Input
+                  id="name"
+                  type="text"
+                  placeholder="Your first name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
+                />
+              </div>
 
               <div className="text-left mb-6">
                 <Label htmlFor="email" className="mb-2 block">
@@ -96,7 +129,7 @@ const EmailCapture = () => {
                 size="lg"
                 className="w-full"
                 onClick={handleSubmit}
-                disabled={isLoading}
+                disabled={isLoading || !name.trim() || !email.trim()}
               >
                 {isLoading ? "Loading..." : "See My Results"}
               </Button>
@@ -105,13 +138,6 @@ const EmailCapture = () => {
                 We'll also send a copy to your inbox. No spam, unsubscribe
                 anytime.
               </p>
-
-              <button
-                onClick={handleSkip}
-                className="mt-4 text-sm text-muted-foreground underline hover:text-foreground transition-colors"
-              >
-                Skip for now
-              </button>
             </CardContent>
           </Card>
         </div>
