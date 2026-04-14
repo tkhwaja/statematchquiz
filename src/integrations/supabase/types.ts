@@ -19,6 +19,7 @@ export type Database = {
           captured_at: string | null
           email: string
           id: string
+          name: string | null
           quiz_answers: Json | null
           top_states: Json | null
           utm_campaign: string | null
@@ -29,6 +30,7 @@ export type Database = {
           captured_at?: string | null
           email: string
           id?: string
+          name?: string | null
           quiz_answers?: Json | null
           top_states?: Json | null
           utm_campaign?: string | null
@@ -39,6 +41,7 @@ export type Database = {
           captured_at?: string | null
           email?: string
           id?: string
+          name?: string | null
           quiz_answers?: Json | null
           top_states?: Json | null
           utm_campaign?: string | null
