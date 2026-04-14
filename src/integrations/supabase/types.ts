@@ -14,7 +14,39 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      email_captures: {
+        Row: {
+          captured_at: string | null
+          email: string
+          id: string
+          quiz_answers: Json | null
+          top_states: Json | null
+          utm_campaign: string | null
+          utm_medium: string | null
+          utm_source: string | null
+        }
+        Insert: {
+          captured_at?: string | null
+          email: string
+          id?: string
+          quiz_answers?: Json | null
+          top_states?: Json | null
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+        }
+        Update: {
+          captured_at?: string | null
+          email?: string
+          id?: string
+          quiz_answers?: Json | null
+          top_states?: Json | null
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
