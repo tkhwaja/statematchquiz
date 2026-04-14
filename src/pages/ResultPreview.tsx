@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { usePostHog } from "@/contexts/PostHogContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { MapPin, Share2 } from "lucide-react";
+import { MapPin, Share2, Sparkles } from "lucide-react";
 import { calculateScores } from "@/lib/scoring";
 import { StateScore, AnswerMap } from "@/lib/types";
 import statesData from "@/data/states.json";
@@ -244,6 +244,65 @@ const ResultPreview = () => {
               );
             })}
           </div>
+
+          {/* Tier 2 Upsell */}
+          <Card className="bg-gradient-to-br from-primary/10 to-accent/10 border-2 border-primary/20 mt-12">
+            <CardContent className="p-8 md:p-12">
+              <div className="text-center">
+                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary mb-4">
+                  <Sparkles className="h-4 w-4" />
+                  Premium
+                </span>
+                <h2 className="text-2xl md:text-3xl font-bold">Ready to actually make the move?</h2>
+                <p className="text-muted-foreground mt-2 mb-8">
+                  Get a personalized relocation report tailored to your top matches
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-4 mb-8">
+                <div className="flex items-center gap-3 text-sm">
+                  <span className="text-lg">📊</span> Cost of living comparison for your income
+                </div>
+                <div className="flex items-center gap-3 text-sm">
+                  <span className="text-lg">💰</span> State-by-state tax impact breakdown
+                </div>
+                <div className="flex items-center gap-3 text-sm">
+                  <span className="text-lg">🏘️</span> Neighborhood-level recommendations
+                </div>
+                <div className="flex items-center gap-3 text-sm">
+                  <span className="text-lg">📋</span> Step-by-step moving checklist
+                </div>
+                <div className="flex items-center gap-3 text-sm">
+                  <span className="text-lg">💼</span> Job market analysis for your field
+                </div>
+                <div className="flex items-center gap-3 text-sm">
+                  <span className="text-lg">📄</span> Downloadable PDF report
+                </div>
+              </div>
+
+              <div className="text-center mt-8">
+                <div className="text-4xl font-bold text-primary">$149</div>
+                <div className="text-sm text-muted-foreground">One-time purchase</div>
+              </div>
+
+              <div className="text-center mt-6">
+                <Button
+                  variant="hero"
+                  size="lg"
+                  className="text-lg px-12 py-6 h-auto"
+                  onClick={() => {
+                    posthog.capture('tier2_cta_clicked', { top_state: results[0]?.state });
+                    navigate("/checkout");
+                  }}
+                >
+                  Get My Relocation Report
+                </Button>
+                <p className="text-sm text-muted-foreground mt-4">
+                  30-day money-back guarantee • Instant delivery
+                </p>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
 
