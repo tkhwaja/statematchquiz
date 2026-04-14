@@ -8,11 +8,16 @@ import { Label } from "@/components/ui/label";
 import CloudBackground from "@/components/CloudBackground";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { calculateScores } from "@/lib/scoring";
+import { AnswerMap } from "@/lib/types";
+import statesData from "@/data/states.json";
 
 const EmailCapture = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const posthog = usePostHog();
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -26,6 +31,11 @@ const EmailCapture = () => {
   }, []);
 
   const handleSubmit = async () => {
+    if (!firstName.trim() || !lastName.trim()) {
+      toast.error("Please enter your first and last name");
+      return;
+    }
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email || !emailRegex.test(email.trim())) {
       toast.error("Please enter a valid email address");
@@ -39,9 +49,11 @@ const EmailCapture = () => {
       const utmSource = searchParams.get("utm_source");
       const utmMedium = searchParams.get("utm_medium");
       const utmCampaign = searchParams.get("utm_campaign");
+      const fullName = firstName.trim() + " " + lastName.trim();
 
       await supabase.from("email_captures").insert({
         email: email.trim(),
+        name: fullName,
         quiz_answers: quizAnswers ? JSON.parse(quizAnswers) : null,
         utm_source: utmSource,
         utm_medium: utmMedium,
@@ -49,7 +61,27 @@ const EmailCapture = () => {
       });
 
       localStorage.setItem("capturedEmail", email.trim());
-      posthog.capture("email_captured");
+      localStorage.setItem("capturedName", fullName);
+      posthog.capture("email_captured", {
+        email: email.trim(),
+        first_name: firstName.trim(),
+        last_name: lastName.trim(),
+      });
+
+      // Calculate scores and send report email in background
+      if (quizAnswers) {
+        const answers: AnswerMap = JSON.parse(quizAnswers);
+        const scores = calculateScores(answers);
+
+        supabase.functions
+          .invoke("send-report", {
+            body: { email: email.trim(), results: scores, statesData },
+          })
+          .catch((error) => {
+            console.error("Failed to send report email:", error);
+          });
+      }
+
       navigate("/result/preview");
     } catch (error) {
       toast.error("Something went wrong. Please try again.");
@@ -58,10 +90,7 @@ const EmailCapture = () => {
     }
   };
 
-  const handleSkip = () => {
-    posthog.capture("email_capture_skipped");
-    navigate("/result/preview");
-  };
+  const isDisabled = isLoading || !firstName.trim() || !lastName.trim() || !email.trim();
 
   return (
     <div className="min-h-screen">
@@ -74,8 +103,35 @@ const EmailCapture = () => {
                 Your results are ready!
               </h1>
               <p className="text-muted-foreground mb-8">
-                Enter your email to see your personalized state matches.
+                Enter your name and email to get your personalized results — we'll send a copy to your inbox too.
               </p>
+
+              <div className="grid grid-cols-2 gap-4 text-left mb-4">
+                <div>
+                  <Label htmlFor="firstName" className="mb-2 block">
+                    First Name
+                  </Label>
+                  <Input
+                    id="firstName"
+                    type="text"
+                    placeholder="First"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="lastName" className="mb-2 block">
+                    Last Name
+                  </Label>
+                  <Input
+                    id="lastName"
+                    type="text"
+                    placeholder="Last"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                  />
+                </div>
+              </div>
 
               <div className="text-left mb-6">
                 <Label htmlFor="email" className="mb-2 block">
@@ -96,7 +152,7 @@ const EmailCapture = () => {
                 size="lg"
                 className="w-full"
                 onClick={handleSubmit}
-                disabled={isLoading}
+                disabled={isDisabled}
               >
                 {isLoading ? "Loading..." : "See My Results"}
               </Button>
@@ -105,13 +161,6 @@ const EmailCapture = () => {
                 We'll also send a copy to your inbox. No spam, unsubscribe
                 anytime.
               </p>
-
-              <button
-                onClick={handleSkip}
-                className="mt-4 text-sm text-muted-foreground underline hover:text-foreground transition-colors"
-              >
-                Skip for now
-              </button>
             </CardContent>
           </Card>
         </div>
