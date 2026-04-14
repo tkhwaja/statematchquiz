@@ -38,8 +38,16 @@ const Landing = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70" />
       </div>
       
-      {/* Hero Section */}
       <div className="container mx-auto px-4 py-20">
+        <nav className="flex items-center justify-between py-4 mb-8">
+          <Link to="/" className="text-white font-bold text-xl">StateMatch</Link>
+          <div className="flex items-center gap-6">
+            <Link to="/blog" className="text-white/80 hover:text-white text-sm transition-colors">Blog</Link>
+            <Button variant="hero" size="sm" onClick={handleStartQuiz}>Take the Quiz</Button>
+          </div>
+        </nav>
+
+        {/* Hero Section */}
         <div className="max-w-4xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary mb-6">
             <Sparkles className="h-4 w-4" />
