@@ -1,1 +1,0 @@
-ALTER TABLE public.email_captures ADD COLUMN name text;

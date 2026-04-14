@@ -29,7 +29,6 @@ const ResultPreview = () => {
     const answers: AnswerMap = JSON.parse(savedAnswers);
     const scores = calculateScores(answers);
     setResults(scores);
-
     posthog.capture('results_viewed', { top_state: scores[0]?.state, total_results: scores.length });
   }, [navigate]);
 
@@ -55,6 +54,9 @@ const ResultPreview = () => {
     }
   };
 
+  // Reverse so #5 is at top, #1 at bottom (countdown effect)
+  const displayResults = [...results].reverse();
+
   return (
     <div className="min-h-screen py-12">
       <CloudBackground />
@@ -71,22 +73,17 @@ const ResultPreview = () => {
             </Button>
           </div>
 
-          <ShareDialog
-            open={shareDialogOpen}
-            onOpenChange={setShareDialogOpen}
-            shareText={generateShareText(results)}
-            shareUrl={getShareUrl()}
-          />
-
           <div className="space-y-6">
-            {results.map((result, index) => {
+            {displayResults.map((result) => {
               const stateData = getStateData(result.state);
+              // Find the actual rank (1-based, where index 0 in original results = #1)
+              const rank = results.indexOf(result) + 1;
               return (
                 <Card key={result.state} className="shadow-lg">
                   <CardHeader>
                     <div className="flex items-start justify-between">
                       <div>
-                        <div className="text-4xl font-bold mb-1">#{index + 1}</div>
+                        <div className="text-4xl font-bold mb-1">#{rank}</div>
                         <CardTitle className="text-3xl">{stateData?.state_name}</CardTitle>
                       </div>
                       <div className="text-right">
@@ -239,7 +236,7 @@ const ResultPreview = () => {
 
                     <div className="pt-4 border-t bg-gradient-to-br from-primary/5 to-accent/5 -mx-6 px-6 py-4 -mb-6 rounded-b-lg">
                       <p className="text-sm text-muted-foreground leading-relaxed">
-                        <span className="font-semibold text-foreground">Perfect Match Summary:</span> This location ranks <span className="font-bold text-primary">#{index + 1}</span> because it strongly aligns with your preferences for <span className="font-semibold">{stateData?.politics.toLowerCase()}</span> values, <span className="font-semibold">{stateData?.climate.toLowerCase()}</span> climate, and <span className="font-semibold">{stateData?.cost_of_living.toLowerCase()}</span> cost of living. {result.city} represents the optimal balance of your priorities within {stateData?.state_name}, offering an ideal environment for your lifestyle and values.
+                        <span className="font-semibold text-foreground">Perfect Match Summary:</span> This location ranks <span className="font-bold text-primary">#{rank}</span> because it strongly aligns with your preferences for <span className="font-semibold">{stateData?.politics.toLowerCase()}</span> values, <span className="font-semibold">{stateData?.climate.toLowerCase()}</span> climate, and <span className="font-semibold">{stateData?.cost_of_living.toLowerCase()}</span> cost of living. {result.city} represents the optimal balance of your priorities within {stateData?.state_name}, offering an ideal environment for your lifestyle and values.
                       </p>
                     </div>
                   </CardContent>
@@ -249,6 +246,8 @@ const ResultPreview = () => {
           </div>
         </div>
       </div>
+
+      <ShareDialog open={shareDialogOpen} onOpenChange={setShareDialogOpen} shareText={generateShareText(results)} shareUrl={getShareUrl()} />
     </div>
   );
 };
