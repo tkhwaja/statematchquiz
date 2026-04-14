@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { usePostHog } from "@/contexts/PostHogContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { MapPin, Share2 } from "lucide-react";
+import { MapPin, Share2, Sparkles } from "lucide-react";
 import { calculateScores } from "@/lib/scoring";
 import { StateScore, AnswerMap } from "@/lib/types";
 import statesData from "@/data/states.json";
