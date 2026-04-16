@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { usePostHog } from "@/contexts/PostHogContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Download, MapPin, Share2, Sparkles } from "lucide-react";
+import { Download, MapPin, Share2 } from "lucide-react";
 import { calculateScores } from "@/lib/scoring";
 import { StateScore, AnswerMap } from "@/lib/types";
 import statesData from "@/data/states.json";
@@ -325,21 +325,5 @@ const ResultFull = () => {
               );
             })}
           </div>
-
-          <Card className="mt-8 bg-gradient-to-br from-primary/5 to-accent/5">
-            <CardContent className="p-8 text-center">
-              <Sparkles className="h-12 w-12 text-primary mx-auto mb-4" />
-              <h3 className="text-xl font-bold mb-2">Your Detailed Relocation Analysis</h3>
-              <p className="text-muted-foreground">
-                Your personalized relocation report with tax calculations, neighborhood recommendations, 
-                and moving checklist is being prepared and will be emailed to you within 24 hours.
-              </p>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
-    </div>
-  );
-};
 
 export default ResultFull;
