@@ -325,5 +325,10 @@ const ResultFull = () => {
               );
             })}
           </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default ResultFull;
