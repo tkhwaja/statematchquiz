@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { usePostHog } from "@/contexts/PostHogContext";
 import { Button } from "@/components/ui/button";
@@ -20,6 +20,7 @@ const ResultFull = () => {
   const [results, setResults] = useState<StateScore[]>([]);
   const [emailSent, setEmailSent] = useState(false);
   const [shareDialogOpen, setShareDialogOpen] = useState(false);
+  const sentForSessionRef = useRef<string | null>(null);
 
   useEffect(() => {
     posthog.capture('page_view', { page: 'result_full' });
@@ -39,7 +40,8 @@ const ResultFull = () => {
     const sessionId = searchParams.get("session_id");
     const savedEmail = localStorage.getItem("reportEmail");
     
-    if (sessionId && savedEmail && !emailSent) {
+    if (sessionId && savedEmail && sentForSessionRef.current !== sessionId) {
+      sentForSessionRef.current = sessionId;
       // Send email with report
       sendReportEmail(savedEmail, scores);
       
@@ -53,7 +55,7 @@ const ResultFull = () => {
         });
       }
     }
-  }, [navigate, searchParams, emailSent]);
+  }, [navigate, searchParams]);
 
   const sendReportEmail = async (email: string, scores: StateScore[]) => {
     try {
