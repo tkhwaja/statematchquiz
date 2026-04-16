@@ -68,20 +68,28 @@ const Quiz = () => {
                 onValueChange={handleAnswer}
                 className="space-y-3"
               >
-                {question.choices.map((choice) => (
-                  <div
-                    key={choice.id}
-                    className="flex items-center space-x-3 rounded-lg border border-border p-4 hover:bg-accent/50 transition-colors cursor-pointer"
-                  >
-                    <RadioGroupItem value={choice.id} id={choice.id} />
-                    <Label
-                      htmlFor={choice.id}
-                      className="flex-1 cursor-pointer text-base"
+                {question.choices.map((choice) => {
+                  const isSelected = answers[question.id] === choice.id;
+                  return (
+                    <div
+                      key={choice.id}
+                      onClick={() => handleAnswer(choice.id)}
+                      className={`flex items-center space-x-3 rounded-lg border p-4 transition-colors cursor-pointer ${
+                        isSelected
+                          ? "border-primary bg-accent"
+                          : "border-border hover:bg-accent/50"
+                      }`}
                     >
-                      {choice.label}
-                    </Label>
-                  </div>
-                ))}
+                      <RadioGroupItem value={choice.id} id={choice.id} />
+                      <Label
+                        htmlFor={choice.id}
+                        className="flex-1 cursor-pointer text-base pointer-events-none"
+                      >
+                        {choice.label}
+                      </Label>
+                    </div>
+                  );
+                })}
               </RadioGroup>
 
               <div className="flex justify-between mt-8 gap-4">
