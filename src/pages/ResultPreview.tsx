@@ -82,79 +82,104 @@ const ResultPreview = () => {
             </p>
           </div>
 
-          {/* Blurred results with paywall overlay */}
-          <div className="relative">
-            <div className="space-y-6 blur-md pointer-events-none select-none" aria-hidden="true">
-              {displayResults.map((result) => {
-                const stateData = getStateData(result.state);
-                const rank = results.indexOf(result) + 1;
-                return (
-                  <Card key={result.state} className="shadow-lg">
-                    <CardHeader>
-                      <div className="flex items-start justify-between">
-                        <div>
-                          <div className="text-4xl font-bold mb-1">#{rank}</div>
-                          <CardTitle className="text-3xl">{stateData?.state_name}</CardTitle>
-                        </div>
-                        <div className="text-right">
-                          <div className="text-sm text-muted-foreground">Match Score</div>
-                          <div className="text-3xl font-bold text-primary">{result.score}</div>
-                        </div>
-                      </div>
-                    </CardHeader>
-                    <CardContent className="space-y-6">
-                      <div className="flex items-center gap-2 bg-gradient-to-r from-primary/10 to-accent/10 p-4 rounded-lg">
-                        <MapPin className="h-8 w-8 text-primary" />
-                        <div>
-                          <div className="text-sm text-muted-foreground">Best City Match</div>
-                          <span className="text-2xl font-bold">{result.city}</span>
-                        </div>
-                      </div>
-                      <div className="grid md:grid-cols-3 gap-4">
-                        <div className="bg-card border rounded-lg p-4 h-28" />
-                        <div className="bg-card border rounded-lg p-4 h-28" />
-                        <div className="bg-card border rounded-lg p-4 h-28" />
-                      </div>
-                      <div className="h-32 bg-muted/30 rounded-lg" />
-                    </CardContent>
-                  </Card>
-                );
-              })}
-            </div>
+          {/* Free #5 reveal + blurred remaining results with paywall overlay */}
+          {(() => {
+            const freeResult = displayResults.find((r) => results.indexOf(r) + 1 === 5);
+            const blurredResults = displayResults.filter((r) => results.indexOf(r) + 1 !== 5);
 
-            {/* Paywall overlay */}
-            <div className="absolute inset-0 flex items-start justify-center pt-12">
-              <Card className="max-w-md w-full mx-4 shadow-2xl border-2 border-primary/30 bg-card sticky top-12">
-                <CardContent className="p-8 text-center">
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
-                    <Lock className="h-8 w-8 text-primary" />
-                  </div>
-                  <h2 className="text-2xl font-bold mb-2">Unlock Your Personalized State Matches</h2>
-                  <p className="text-muted-foreground mb-6">
-                    See your top 5 state matches with full details, best cities, and why each one fits you.
-                  </p>
+            const renderCard = (result: StateScore, blurred: boolean) => {
+              const stateData = getStateData(result.state);
+              const rank = results.indexOf(result) + 1;
+              return (
+                <Card
+                  key={result.state}
+                  className={`shadow-lg ${blurred ? "blur-md pointer-events-none select-none" : ""}`}
+                >
+                  <CardHeader>
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <div className="text-4xl font-bold mb-1">#{rank}</div>
+                        <CardTitle className="text-3xl">{stateData?.state_name}</CardTitle>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-sm text-muted-foreground">Match Score</div>
+                        <div className="text-3xl font-bold text-primary">{result.score}</div>
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="space-y-6">
+                    <div className="flex items-center gap-2 bg-gradient-to-r from-primary/10 to-accent/10 p-4 rounded-lg">
+                      <MapPin className="h-8 w-8 text-primary" />
+                      <div>
+                        <div className="text-sm text-muted-foreground">Best City Match</div>
+                        <span className="text-2xl font-bold">{result.city}</span>
+                      </div>
+                    </div>
+                    <div className="grid md:grid-cols-3 gap-4">
+                      <div className="bg-card border rounded-lg p-4 h-28" />
+                      <div className="bg-card border rounded-lg p-4 h-28" />
+                      <div className="bg-card border rounded-lg p-4 h-28" />
+                    </div>
+                    <div className="h-32 bg-muted/30 rounded-lg" />
+                  </CardContent>
+                </Card>
+              );
+            };
+
+            return (
+              <>
+                {freeResult && (
                   <div className="mb-6">
-                    <div className="text-4xl font-bold text-primary">$6.99</div>
-                    <div className="text-sm text-muted-foreground">One-time payment</div>
+                    <div className="text-center mb-4">
+                      <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-semibold">
+                        Free Preview · Your #5 Match
+                      </span>
+                    </div>
+                    {renderCard(freeResult, false)}
                   </div>
-                  <Button
-                    variant="hero"
-                    size="lg"
-                    className="w-full text-lg"
-                    onClick={handleUnlock}
-                    disabled={isLoading || results.length === 0}
-                  >
-                    {isLoading ? (
-                      <><Loader2 className="mr-2 h-5 w-5 animate-spin" /> Loading...</>
-                    ) : (
-                      <>Unlock My Results</>
-                    )}
-                  </Button>
-                  <p className="text-xs text-muted-foreground mt-4">🔒 Secure checkout via Stripe</p>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
+                )}
+
+                <div className="relative">
+                  <div className="space-y-6" aria-hidden="true">
+                    {blurredResults.map((r) => renderCard(r, true))}
+                  </div>
+
+                  {/* Paywall overlay */}
+                  <div className="absolute inset-0 flex items-start justify-center pt-12">
+                    <Card className="max-w-md w-full mx-4 shadow-2xl border-2 border-primary/30 bg-card sticky top-12">
+                      <CardContent className="p-8 text-center">
+                        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
+                          <Lock className="h-8 w-8 text-primary" />
+                        </div>
+                        <h2 className="text-2xl font-bold mb-2">Unlock Your Top 4 Matches</h2>
+                        <p className="text-muted-foreground mb-6">
+                          See your top 4 state matches with full details, best cities, and why each one fits you.
+                        </p>
+                        <div className="mb-6">
+                          <div className="text-4xl font-bold text-primary">$6.99</div>
+                          <div className="text-sm text-muted-foreground">One-time payment</div>
+                        </div>
+                        <Button
+                          variant="hero"
+                          size="lg"
+                          className="w-full text-lg"
+                          onClick={handleUnlock}
+                          disabled={isLoading || results.length === 0}
+                        >
+                          {isLoading ? (
+                            <><Loader2 className="mr-2 h-5 w-5 animate-spin" /> Loading...</>
+                          ) : (
+                            <>Unlock My Results</>
+                          )}
+                        </Button>
+                        <p className="text-xs text-muted-foreground mt-4">🔒 Secure checkout via Stripe</p>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </div>
+              </>
+            );
+          })()}
 
           {/* Blog Link */}
           <div className="mt-12 mb-4">
