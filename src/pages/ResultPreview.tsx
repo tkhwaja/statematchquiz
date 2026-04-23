@@ -84,12 +84,13 @@ const ResultPreview = () => {
 
           {/* Blurred results with paywall overlay */}
           <div className="relative">
-            <div className="space-y-6 blur-md pointer-events-none select-none" aria-hidden="true">
+            <div className="space-y-6" aria-hidden="true">
               {displayResults.map((result) => {
                 const stateData = getStateData(result.state);
                 const rank = results.indexOf(result) + 1;
+                const isFree = rank === 5;
                 return (
-                  <Card key={result.state} className="shadow-lg">
+                  <Card key={result.state} className={`shadow-lg ${isFree ? "" : "blur-md pointer-events-none select-none"}`}>
                     <CardHeader>
                       <div className="flex items-start justify-between">
                         <div>
