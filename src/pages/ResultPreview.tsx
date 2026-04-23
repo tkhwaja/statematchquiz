@@ -115,12 +115,96 @@ const ResultPreview = () => {
                         <span className="text-2xl font-bold">{result.city}</span>
                       </div>
                     </div>
+
                     <div className="grid md:grid-cols-3 gap-4">
-                      <div className="bg-card border rounded-lg p-4 h-28" />
-                      <div className="bg-card border rounded-lg p-4 h-28" />
-                      <div className="bg-card border rounded-lg p-4 h-28" />
+                      <div className="bg-card border rounded-lg p-4 space-y-2">
+                        <div className="text-2xl">🏠</div>
+                        <div className="text-xs text-muted-foreground">Cost of Living</div>
+                        <div className="font-semibold text-lg">{stateData?.cost_of_living}</div>
+                        {stateData?.avg_home_price && (
+                          <div className="text-xs text-muted-foreground">~{stateData.avg_home_price}</div>
+                        )}
+                      </div>
+                      <div className="bg-card border rounded-lg p-4 space-y-2">
+                        <div className="text-2xl">☀️</div>
+                        <div className="text-xs text-muted-foreground">Climate</div>
+                        <div className="font-semibold text-lg">{stateData?.climate}</div>
+                        {stateData?.avg_temp && (
+                          <div className="text-xs text-muted-foreground">{stateData.avg_temp}</div>
+                        )}
+                      </div>
+                      <div className="bg-card border rounded-lg p-4 space-y-2">
+                        <div className="text-2xl">💼</div>
+                        <div className="text-xs text-muted-foreground">Job Market</div>
+                        <div className="font-semibold text-lg">{stateData?.job_market || "Good"}</div>
+                        {stateData?.avg_salary && (
+                          <div className="text-xs text-muted-foreground">{stateData.avg_salary}</div>
+                        )}
+                      </div>
                     </div>
-                    <div className="h-32 bg-muted/30 rounded-lg" />
+
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div className="space-y-3">
+                        <div className="flex items-start gap-2">
+                          <span className="text-lg">🗳️</span>
+                          <div>
+                            <div className="font-semibold text-sm">Politics</div>
+                            <div className="text-sm text-muted-foreground">{stateData?.politics}</div>
+                          </div>
+                        </div>
+                        <div className="flex items-start gap-2">
+                          <span className="text-lg">🏥</span>
+                          <div>
+                            <div className="font-semibold text-sm">Healthcare</div>
+                            <div className="text-sm text-muted-foreground">{stateData?.healthcare_quality}</div>
+                          </div>
+                        </div>
+                        <div className="flex items-start gap-2">
+                          <span className="text-lg">🔒</span>
+                          <div>
+                            <div className="font-semibold text-sm">Safety</div>
+                            <div className="text-sm text-muted-foreground">Crime: {stateData?.crime_level}</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="space-y-3">
+                        <div className="flex items-start gap-2">
+                          <span className="text-lg">🏞️</span>
+                          <div>
+                            <div className="font-semibold text-sm">Landscape</div>
+                            <div className="text-sm text-muted-foreground">{stateData?.landscape}</div>
+                          </div>
+                        </div>
+                        <div className="flex items-start gap-2">
+                          <span className="text-lg">👶</span>
+                          <div>
+                            <div className="font-semibold text-sm">Abortion Laws</div>
+                            <div className="text-sm text-muted-foreground">{stateData?.abortion_laws}</div>
+                          </div>
+                        </div>
+                        <div className="flex items-start gap-2">
+                          <span className="text-lg">🔫</span>
+                          <div>
+                            <div className="font-semibold text-sm">Gun Laws</div>
+                            <div className="text-sm text-muted-foreground">{stateData?.gun_laws}</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="pt-4 border-t">
+                      <h4 className="font-semibold text-lg mb-3 flex items-center gap-2">
+                        <span>🎯</span> Why This Match?
+                      </h4>
+                      <div className="space-y-2">
+                        {stateData?.highlights.map((highlight, i) => (
+                          <div key={i} className="flex items-start gap-2 text-sm">
+                            <span className="text-primary mt-1">✓</span>
+                            <span className="text-muted-foreground">{highlight}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </CardContent>
                 </Card>
               );
