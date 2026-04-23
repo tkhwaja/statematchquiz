@@ -8,9 +8,6 @@ import { Label } from "@/components/ui/label";
 import CloudBackground from "@/components/CloudBackground";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { calculateScores } from "@/lib/scoring";
-import { AnswerMap } from "@/lib/types";
-import statesData from "@/data/states.json";
 
 const EmailCapture = () => {
   const navigate = useNavigate();
@@ -67,20 +64,6 @@ const EmailCapture = () => {
         first_name: firstName.trim(),
         last_name: lastName.trim(),
       });
-
-      // Calculate scores and send report email in background
-      if (quizAnswers) {
-        const answers: AnswerMap = JSON.parse(quizAnswers);
-        const scores = calculateScores(answers);
-
-        supabase.functions
-          .invoke("send-report", {
-            body: { email: email.trim(), results: scores, statesData },
-          })
-          .catch((error) => {
-            console.error("Failed to send report email:", error);
-          });
-      }
 
       navigate("/result/preview");
     } catch (error) {
