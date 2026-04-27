@@ -110,7 +110,7 @@ function buildTeaserHtml(name: string | null, results: StateScore[]) {
       <a href="https://statematchquiz.com/result/preview" style="display:inline-block; background:linear-gradient(135deg,#4F46E5,#7C3AED); color:white; padding:16px 40px; border-radius:8px; text-decoration:none; font-size:18px; font-weight:bold; box-shadow:0 4px 12px rgba(79,70,229,0.3);">
         Unlock My Full Report →
       </a>
-      <p style="color:#9ca3af; font-size:12px; margin-top:12px;">One-time $149 — instant access</p>
+      <p style="color:#9ca3af; font-size:12px; margin-top:12px;">One-time $6.99 — instant access</p>
     </div>
 
     <p style="color:#9ca3af; font-size:12px; text-align:center; margin-top:40px; border-top:1px solid #e5e7eb; padding-top:16px;">
