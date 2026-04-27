@@ -18,8 +18,11 @@ export type Database = {
         Row: {
           captured_at: string | null
           email: string
+          followup_sent_at: string | null
           id: string
           name: string | null
+          paid: boolean
+          paid_at: string | null
           quiz_answers: Json | null
           top_states: Json | null
           utm_campaign: string | null
@@ -29,8 +32,11 @@ export type Database = {
         Insert: {
           captured_at?: string | null
           email: string
+          followup_sent_at?: string | null
           id?: string
           name?: string | null
+          paid?: boolean
+          paid_at?: string | null
           quiz_answers?: Json | null
           top_states?: Json | null
           utm_campaign?: string | null
@@ -40,8 +46,11 @@ export type Database = {
         Update: {
           captured_at?: string | null
           email?: string
+          followup_sent_at?: string | null
           id?: string
           name?: string | null
+          paid?: boolean
+          paid_at?: string | null
           quiz_answers?: Json | null
           top_states?: Json | null
           utm_campaign?: string | null
