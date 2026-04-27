@@ -44,7 +44,16 @@ const ResultFull = () => {
       sentForSessionRef.current = sessionId;
       // Send email with report
       sendReportEmail(savedEmail, scores);
-      
+
+      // Mark this capture as paid so the 24h follow-up teaser doesn't get sent
+      supabase
+        .from("email_captures")
+        .update({ paid: true, paid_at: new Date().toISOString() })
+        .eq("email", savedEmail)
+        .then(({ error }) => {
+          if (error) console.error("Failed to mark capture paid:", error);
+        });
+
       // Track Google Ads conversion
       if (typeof window !== 'undefined' && (window as any).gtag) {
         (window as any).gtag('event', 'conversion', {
